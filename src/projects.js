@@ -1,6 +1,8 @@
-let projects = [
+
+const main = document.querySelector('#main')
+const projects = [
 	{
-		projName: 'FIX the World',
+		name: 'FIX the World',
 		todo: [
 			{
 				title: 'Destroy AI',
@@ -19,7 +21,7 @@ let projects = [
 		],
 	},
 	{
-		projName: 'Everyday Maintenance',
+		name: 'Everyday Maintenance',
 		todo: [
 			{
 				title: 'Brush Teeth',
@@ -37,8 +39,6 @@ let projects = [
 		],
 	},
 ];
-
-
 
 
 class Project {
@@ -92,4 +92,4 @@ class Todo {
 // 	],
 // };
 
-export { projects };
+export { projects, main };
