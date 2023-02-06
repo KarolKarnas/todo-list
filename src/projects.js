@@ -1,5 +1,7 @@
 
 const main = document.querySelector('#main')
+const ulAllProjects = document.querySelector('#all-projects')
+
 const projects = [
 	{
 		name: 'FIX the World',
@@ -92,4 +94,4 @@ class Todo {
 // 	],
 // };
 
-export { projects, main };
+export { projects, main, ulAllProjects };
