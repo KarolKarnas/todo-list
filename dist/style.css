@@ -212,11 +212,14 @@ main h1 {
 	flex-basis: 2%;
 }
 .todo-list .col-2 {
-	flex-basis: 78%;
+	flex-basis: 88%;
 }
 .todo-list .col-3 {
-	flex-basis: 20%;
+	flex-basis: 10%;
 	text-align: right;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .checkbox {
@@ -228,13 +231,14 @@ main h1 {
 .todo-title {
 	font-size: 1.5rem;
 	font-weight: 500;
-	margin-bottom: 0.5rem;
+	/* margin-bottom: 0.5rem; */
 }
 
 .todo-project-name {
-	font-size: 1rem;
+	display: inline-block;
+	font-size: 0.8rem;
 	font-style: italic;
-	padding-left: 0.5rem;
+	/* padding-left: 0.5rem; */
 	font-weight: 500;
 	color: var(--blue);
 }
@@ -242,3 +246,21 @@ main h1 {
 .todo-description {
 	font-style: italic;
 }
+
+.todo-icons-container {
+	display: flex;
+	justify-content: end;
+}
+
+.todo-icon-edit {
+	font-size: 1.3rem;
+	color: var(--blue);
+}
+
+.todo-icon-delete {
+	font-size: 1.3rem;
+	color: var(--light-red);
+}
+
+
+

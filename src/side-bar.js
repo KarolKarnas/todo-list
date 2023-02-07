@@ -5,7 +5,7 @@ function createProjectsList() {
 projects.forEach((proj) => {
     const projectItemMenu = document.createElement('li');
     projectItemMenu.textContent = proj.name;
-    console.log(projectItemMenu);
+    // console.log(projectItemMenu);
     ulAllProjects.appendChild(projectItemMenu);
 })
 

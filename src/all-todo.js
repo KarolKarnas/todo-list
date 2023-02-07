@@ -50,10 +50,10 @@ function createAllTodo() {
 			todoTitle.textContent = todo.title;
 			col2.appendChild(todoTitle);
 
-			const todoProjectName = document.createElement('span');
+			const todoProjectName = document.createElement('div');
 			todoProjectName.classList.add('todo-project-name');
 			todoProjectName.textContent = proj.name;
-			todoTitle.appendChild(todoProjectName);
+			col2.appendChild(todoProjectName);
 
 			const todoDescription = document.createElement('div');
 			todoDescription.classList.add('todo-description');
@@ -65,6 +65,23 @@ function createAllTodo() {
 			const todoDate = document.createElement('input');
 			todoDate.setAttribute('type', 'date');
 			col3.appendChild(todoDate);
+
+			const todoIconsContainer = document.createElement('div');
+			todoIconsContainer.classList.add('todo-icons-container');
+			col3.appendChild(todoIconsContainer);
+
+			const todoIconEdit = document.createElement('i');
+			todoIconEdit.textContent = 'edit';
+			todoIconEdit.classList.add('material-symbols-outlined', 'todo-icon-edit');
+			todoIconsContainer.appendChild(todoIconEdit);
+
+			const todoIconDelete = document.createElement('i');
+			todoIconDelete.textContent = 'delete';
+			todoIconDelete.classList.add(
+				'material-symbols-outlined',
+				'todo-icon-delete'
+			);
+			todoIconsContainer.appendChild(todoIconDelete);
 		});
 	});
 }
