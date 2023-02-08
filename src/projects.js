@@ -18,8 +18,6 @@ todoContainer.appendChild(ulTodoList);
 
 // ----------------------------------------
 
-// const projects2 = [];
-
 // const createTodo = () => {
 // 	projects2.push('todo');
 // };
@@ -46,6 +44,7 @@ const projects = [
 					'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere perferendis accusantium.',
 				dueDate: 'dd/mm/yyyy',
 				priority: 'p1',
+				checklist: false,
 			},
 			{
 				title: 'Rebuild Houses',
@@ -53,6 +52,7 @@ const projects = [
 					'Atque nisi doloremque tempore dicta porro, dolorum consectetur veniam perspiciatis error?',
 				dueDate: 'dd/mm/yyyy',
 				priority: 'p1',
+				checklist: false,
 			},
 		],
 	},
@@ -64,6 +64,7 @@ const projects = [
 				description: 'Dolorum amet soluta explicabo ratione! Ducimus, nam!',
 				dueDate: 'dd/mm/yyyy',
 				priority: 'p1',
+				checklist: false,
 			},
 			{
 				title: 'Meditation',
@@ -71,95 +72,47 @@ const projects = [
 					'Nisi doloribus tempore dolorum nam soluta explicabo ratione! Ducimus, amet!',
 				dueDate: 'dd/mm/yyyy',
 				priority: 'p1',
+				checklist: false,
 			},
 		],
 	},
 ];
 
-console.log(projects)
+// project factory
+const createProject = ({ name = 'Unknown' } = {}) => {
+	return { name, todo: []};
+};
 
-class Project {
-	constructor() {
-		this.projName = projName;
-		this.todo = todo;
-	}
+// push proj to projects
+function pushProject(proj) {
+	projects.push(proj);
 }
 
-class Todo {
-	constructor() {
-		this.title = title;
-		this.description = description;
-		this.dueDate = dueDate;
-		this.priority = this.priority;
-	}
+let testProject = createProject();
+pushProject(testProject);
+console.log(testProject);
+console.log(projects);
+
+// todo factory
+const createTodo = ({ title = 'Unknown', description = 'no description', priority = 'p1', checklist = false } = {}) => {
+return {title, description, dueDate, priority, checklist}
+};
+
+// push todo 
+
+function pushTodo(indexNum, todo) {
+	projects[indexNum].todo.push(todo);
 }
 
-// const todoArr = [
-// 	{
-// 		name: 'FIX the World',
-// 		title: 'Destroy AI',
-// 		description:
-// 			'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere perferendis accusantium.',
-// 		dueDate: 'dd/mm/yyyy',
-// 		priority: 'p1',
-// 	},
-// 	{
-// 		name: 'FIX the World',
-// 		title: 'Rebuild Houses',
-// 		description:
-// 			'Atque nisi doloremque tempore dicta porro, dolorum consectetur veniam perspiciatis error?',
-// 		dueDate: 'dd/mm/yyyy',
-// 		priority: 'p1',
-// 	},
-// 	{
-// 		name: 'Everyday Maintenance',
-// 		title: 'Brush Teeth',
-// 		description: 'Dolorum amet soluta explicabo ratione! Ducimus, nam!',
-// 		dueDate: 'dd/mm/yyyy',
-// 		priority: 'p1',
-// 	},
-// 	{
-// 		name: 'Everyday Maintenance',
-// 		title: 'Meditation',
-// 		description:
-// 			'Nisi doloribus tempore dolorum nam soluta explicabo ratione! Ducimus, amet!',
-// 		dueDate: 'dd/mm/yyyy',
-// 		priority: 'p1',
-// 	},
 
-// ]
+let testTodo = createTodo();
+console.log(testTodo);
+pushTodo(2, testTodo);
 
-// let todoArr = [
-// 	{
-// 		project: 'Project 1',
-// 		title: 'Title 1',
-// 		description: 'Description 1',
-// 		dueDate: 'dd/mm/yyyy',
-// 		priority: 'p1',
-// 		checklist: 'false',
-// 	},
-// ];
+function clearMain() {
 
-// let Project1 = {
-// 	name: 'Project1',
-// 	todos: [
-// 		{
-// 			project: 'Project 1',
-// 			title: 'Title 1',
-// 			description: 'Description 1',
-// 			dueDate: 'dd/mm/yyyy',
-// 			priority: 'p1',
-// 			checklist: 'false',
-// 		},
-// 		{
-// 			project: 'Project 2',
-// 			title: 'Title 2',
-// 			description: 'Description 2',
-// 			dueDate: 'dd/mm/yyyy',
-// 			priority: 'p1',
-// 			checklist: 'false',
-// 		},
-// 	],
-// };
+}
+
+function createTodo()
 
 export { projects, main, ulAllProjects, title, todoContainer, ulTodoList };

@@ -3,9 +3,9 @@ import { projects, todoContainer, ulTodoList } from './projects';
 function createTodo() {
 
 // console.log(projects);
+// base on array length? projects.length / position [0]?
 projects.forEach((proj) => {
     // console.log(proj.name);
-
     proj.todo.forEach((todo) => {
         //li element for every todo
         const todoSingle = document.createElement('li');
