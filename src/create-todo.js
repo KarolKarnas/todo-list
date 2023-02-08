@@ -1,18 +1,11 @@
-import { projects } from './projects';
+import { projects, todoContainer, ulTodoList } from './projects';
 
 function createTodo() {
-
-	const todoContainer = document.createElement('div');
-	todoContainer.classList.add('todo-container');
-	main.appendChild(todoContainer);
-
-	const ulTodoList = document.createElement('ul');
-	ulTodoList.classList.add('todo-list');
-	todoContainer.appendChild(ulTodoList);
 
 // console.log(projects);
 projects.forEach((proj) => {
     // console.log(proj.name);
+
     proj.todo.forEach((todo) => {
         //li element for every todo
         const todoSingle = document.createElement('li');

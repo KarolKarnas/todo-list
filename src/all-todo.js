@@ -1,14 +1,12 @@
-import { projects } from './projects';
+import { projects, main, title } from './projects';
 import createTodo from './create-todo';
 
 function createAllTodo() {
-	// Create h1
-	const title = document.createElement('h1');
-	title.textContent = 'All Todo';
-	main.appendChild(title);
+	// change h1 text
 
+	title.textContent = 'All Todo';
 	createTodo()
-	
+
 }
 
 export default createAllTodo;
