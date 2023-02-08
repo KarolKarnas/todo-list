@@ -57,10 +57,11 @@
 
 				<div class="form-row-button">
 					<button class="form-btn" id="submit-btn" type="submit">SUBMIT</button>
-					<button data-close-button class="close-button form-btn" id="cancel-btn">CANCEL</button>
+					<button data-close-button class="close-button form-btn" id="cancel-btn" type="button">CANCEL</button>
 				</div>
 			</form>
 		</div>
+		<div id="overlay"></div>
 
 		<div id="content">
 			<header>
@@ -73,7 +74,12 @@
 				</div>
 
 				<div class="header-name">
-					<i class="material-symbols-outlined add-todo">add</i>
+					<button
+							data-modal-target="#modal"
+							class="material-symbols-outlined add-todo"
+						>
+							add
+						</button>
 					<p>Karol Karnas</p>
 					<img class="avatar-name avatar" src="./img/KK-login.png" />
 				</div>
