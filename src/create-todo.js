@@ -4,8 +4,12 @@ function createTodo() {
 
 // console.log(projects);
 // base on array length? projects.length / position [0]?
+// for loop?
+// readProject function
 projects.forEach((proj) => {
     // console.log(proj.name);
+
+    // projects[index].todo.forEach((todo) => {
     proj.todo.forEach((todo) => {
         //li element for every todo
         const todoSingle = document.createElement('li');

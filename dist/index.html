@@ -20,7 +20,7 @@
 		<div class="modal" id="modal" style="display: inherit">
 			<form id="form-todo" action="" method="get">
 				<div class="form-row">
-					<input type="text" name="title" id="title" placeholder="Task name" />
+					<input type="text" name="todo-title" id="todo-title" placeholder="Todo title" />
 				</div>
 
 				<div class="form-row">
@@ -29,6 +29,15 @@
 						name="description"
 						id="description"
 						placeholder="Description"
+					/>
+				</div>
+
+				<div class="form-row">
+					<input
+						type="text"
+						name="project-name"
+						id="project-name"
+						placeholder="Project name"
 					/>
 				</div>
 
@@ -46,14 +55,14 @@
 						<option value="p4">Priority 4</option>
 					</select>
 				</div>
-				<div class="form-row">
+				<!-- <div class="form-row">
 					<label for="selectProject">Project</label>
 
 					<select name="selectProject" id="selectProject">
 						<option value="project1">FIX the World</option>
 						<option value="project2">Everyday Maintenance</option>
 					</select>
-				</div>
+				</div> -->
 				
 				<div class="form-row-button">
 					<button class="form-btn" id="submit-btn" type="submit">SUBMIT</button>

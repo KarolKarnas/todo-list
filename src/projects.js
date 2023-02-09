@@ -16,22 +16,6 @@ const ulTodoList = document.createElement('ul');
 ulTodoList.classList.add('todo-list');
 todoContainer.appendChild(ulTodoList);
 
-// ----------------------------------------
-
-// const createTodo = () => {
-// 	projects2.push('todo');
-// };
-
-// createTodo();
-// createTodo();
-
-// const todoTest = createTodo();
-
-// console.log(todoTest);
-// console.log(projects2);
-
-// console.log(projects2);
-
 // ------------------------------------------------
 
 const projects = [
@@ -80,7 +64,7 @@ const projects = [
 
 // project factory
 const createProject = ({ name = 'Unknown' } = {}) => {
-	return { name, todo: []};
+	return { name, todo: [] };
 };
 
 // push proj to projects
@@ -90,29 +74,64 @@ function pushProject(proj) {
 
 let testProject = createProject();
 pushProject(testProject);
-console.log(testProject);
-console.log(projects);
+// console.log(testProject);
+// console.log(projects);
 
-// todo factory
-const createTodo = ({ title = 'Unknown', description = 'no description', priority = 'p1', checklist = false } = {}) => {
-return {title, description, dueDate, priority, checklist}
+// todo factory with defaults
+const createTodo = ({
+	title = 'Unknown',
+	description = 'no description',
+	priority = 'p1',
+	checklist = false,
+} = {}) => {
+	return { title, description, dueDate, priority, checklist };
 };
 
-// push todo 
+// push todo
 
 function pushTodo(indexNum, todo) {
 	projects[indexNum].todo.push(todo);
 }
 
-
 let testTodo = createTodo();
 console.log(testTodo);
 pushTodo(2, testTodo);
 
-function clearMain() {
+// take input
 
+const createTodo2 = (title, description, projectName) => {
+	return { title, description, projectName };
+};
+
+console.log(createTodo2('brush', 'exactly', 'Maintenance'));
+
+const todoTitleInput = document.querySelector('#todo-title');
+const todoDescriptionInput = document.querySelector('#description');
+const todoProjectNameInput = document.querySelector('#project-name');
+
+
+function addTodoToProjectsArray(event) {
+	let newTodo = createTodo2(
+		todoTitleInput.value,
+		todoDescriptionInput.value,
+		todoProjectNameInput.value
+	);
+
+	console.log(newTodo);
+	event.preventDefault();
 }
 
-function createTodo()
+//submit button
 
+let submitButton = document.querySelector('#submit-btn');
+console.log(submitButton);
+
+console.log('test');
+submitButton.addEventListener('click', addTodoToProjectsArray);
+
+// function clearMain() {
+
+// }
+
+// function createTodo()
 export { projects, main, ulAllProjects, title, todoContainer, ulTodoList };

@@ -299,11 +299,15 @@ main h1 {
 	padding: 10px;
 }
 
-.form-row #title {
+.form-row #todo-title {
 	font-size: 1.5rem;
 }
 
 .form-row #description {
+	font-size: 1.2rem;
+}
+
+.form-row #project-name {
 	font-size: 1.2rem;
 }
 
