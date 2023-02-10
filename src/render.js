@@ -1,4 +1,22 @@
-import { projects, todoContainer, ulTodoList, title, ulAllProjects } from './projects';
+import { projects } from './projects';
+
+//GLOBAL
+// SELECT VARIABLES
+const main = document.querySelector('#main');
+const ulAllProjects = document.querySelector('#all-projects');
+
+// CREATE MAIN CONTENT
+const title = document.createElement('h1');
+title.textContent = 'All Todo';
+main.appendChild(title);
+
+const todoContainer = document.createElement('div');
+todoContainer.classList.add('todo-container');
+main.appendChild(todoContainer);
+
+const ulTodoList = document.createElement('ul');
+ulTodoList.classList.add('todo-list');
+todoContainer.appendChild(ulTodoList);
 
 function createTodo() {
 	let projectIndex = 0;
