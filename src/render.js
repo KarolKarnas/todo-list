@@ -6,7 +6,9 @@ const main = document.querySelector('#main');
 const ulAllProjects = document.querySelector('#all-projects');
 
 // CREATE MAIN CONTENT
+
 const title = document.createElement('h1');
+title.classList.add('project-title-header')
 title.textContent = 'All Todo';
 main.appendChild(title);
 
@@ -18,8 +20,10 @@ const ulTodoList = document.createElement('ul');
 ulTodoList.classList.add('todo-list');
 todoContainer.appendChild(ulTodoList);
 
-function createTodo() {
-	let projectIndex = 0;
+
+//CREATE TODO
+function createTodo(projectIndex) {
+	// let projectIndex = 0;
 
 	projects[projectIndex].todo.forEach((todo) => {
 		//li element for every todo
@@ -89,7 +93,24 @@ function createTodo() {
 	});
 }
 
-// create navigation projects with listeners
+// render all todos
+
+function createALlTodo() {
+	projects.forEach((element, index) => {
+		createTodo(index);
+	});
+}
+
+// clear main
+
+function clearTodoList() {
+	// ulTodoList.innerHTML = '';
+	while (ulTodoList.firstChild) {
+		ulTodoList.removeChild(ulTodoList.firstChild);
+	}
+}
+
+// create navigation projects li with listeners
 
 function createProjectsList() {
 	projects.forEach((proj, index) => {
@@ -100,7 +121,8 @@ function createProjectsList() {
 		projectItemMenu.addEventListener('click', () => {
 			console.log(index, proj.name);
 			title.textContent = proj.name;
-			// clearMain()
+			clearTodoList()
+			createTodo(index)
 			// renderMain()
 			// title - proj.name
 			// todo - foreach of index
@@ -147,4 +169,4 @@ function closeModal(modal) {
 	overlay.classList.remove('active');
 }
 
-export { createTodo, createProjectsList };
+export { createTodo, createProjectsList, createALlTodo };

@@ -1,6 +1,4 @@
-import { createTodo, createProjectsList }  from './render';
-// import createProjectsList from './create-todo';
+import { createTodo, createProjectsList,createALlTodo }  from './render';
 
-// console.log('test');
-createTodo();
+createALlTodo();
 createProjectsList();
