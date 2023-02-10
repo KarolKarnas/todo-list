@@ -1,5 +1,5 @@
-import createTodo from './create-todo';
-import createProjectsList from './side-bar';
+import { createTodo, createProjectsList }  from './render';
+// import createProjectsList from './create-todo';
 
 // console.log('test');
 createTodo();
