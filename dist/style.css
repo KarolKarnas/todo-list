@@ -147,7 +147,7 @@ header {
 	padding: 2px;
 }
 
-.sidebar-menu > li:first-of-type {
+#li-all-todo, #all-projects {
 	font-weight: 900;
 	display: flex;
 	justify-content: space-between;
@@ -162,6 +162,10 @@ header {
 .sidebar-menu > li:hover {
 	cursor: pointer;
 	/* color: var(--light-blue); */
+	background-color: var(--light-blue);
+}
+
+.li-active {
 	background-color: var(--light-blue);
 }
 

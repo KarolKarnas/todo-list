@@ -3,12 +3,16 @@ import { projects } from './projects';
 //GLOBAL
 // SELECT VARIABLES
 const main = document.querySelector('#main');
-const ulAllProjects = document.querySelector('#all-projects');
+
+const ulNav = document.querySelector('#ul-nav');
+const liAllProjects = document.querySelector('#all-projects');
+
+let allLi = ulNav.querySelectorAll('li');
 
 // CREATE MAIN CONTENT
 
 const title = document.createElement('h1');
-title.classList.add('project-title-header')
+title.classList.add('project-title-header');
 title.textContent = 'All Todo';
 main.appendChild(title);
 
@@ -19,7 +23,6 @@ main.appendChild(todoContainer);
 const ulTodoList = document.createElement('ul');
 ulTodoList.classList.add('todo-list');
 todoContainer.appendChild(ulTodoList);
-
 
 //CREATE TODO
 function createTodo(projectIndex) {
@@ -110,25 +113,69 @@ function clearTodoList() {
 	}
 }
 
+// class toggle on nav
+
+function selectAllLi() {
+	allLi = ulNav.querySelectorAll('li')
+}
+
+function removeLiActive() {
+	allLi.forEach(element => {
+		element.classList.remove('li-active');
+	});
+}
+
+function addToggleClassOnLi() {
+allLi.forEach((element) => {
+	element.addEventListener('click', (e) => {
+		removeLiActive()
+		// element.classList.remove('li-active');
+		e.target.classList.add('li-active');
+		// console.log(e.target);
+	});
+});
+}
+
 // create navigation projects li with listeners
 
 function createProjectsList() {
 	projects.forEach((proj, index) => {
 		const projectItemMenu = document.createElement('li');
 		projectItemMenu.textContent = proj.name;
-		ulAllProjects.appendChild(projectItemMenu);
+		liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
+		// toggle class active
+		selectAllLi()
+		addToggleClassOnLi()
 
+		// render content with according index number
 		projectItemMenu.addEventListener('click', () => {
-			console.log(index, proj.name);
+			// console.log(index, proj.name);
 			title.textContent = proj.name;
-			clearTodoList()
-			createTodo(index)
+			clearTodoList();
+			createTodo(index);
 			// renderMain()
 			// title - proj.name
 			// todo - foreach of index
 		});
 	});
 }
+
+// Event listener for ALL Todo li - render all todos
+
+const allTodoLi = document.querySelector('#li-all-todo');
+allTodoLi.addEventListener('click', () => {
+	clearTodoList();
+	createALlTodo();
+});
+
+// add remove active on li items
+
+// allLi.forEach(element => {
+// 	element.addEventListener('click', () => {
+// 		element.classList.add('li-active');
+// 	})
+
+// selectAllLi()
 
 // MODAL
 
