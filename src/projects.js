@@ -5,7 +5,7 @@ const ulAllProjects = document.querySelector('#all-projects');
 
 // CREATE MAIN CONTENT
 const title = document.createElement('h1');
-// title.textContent = 'All Todo';
+title.textContent = 'All Todo';
 main.appendChild(title);
 
 const todoContainer = document.createElement('div');
@@ -62,6 +62,8 @@ const projects = [
 	},
 ];
 
+
+// LOGIC.JS
 // project factory
 const createProject = ({ name = 'Unknown' } = {}) => {
 	return { name, todo: [] };
@@ -126,7 +128,7 @@ function addTodoToProjectsArray(event) {
 let submitButton = document.querySelector('#submit-btn');
 console.log(submitButton);
 
-console.log('test');
+// console.log('test');
 submitButton.addEventListener('click', addTodoToProjectsArray);
 
 // function clearMain() {

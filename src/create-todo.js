@@ -2,16 +2,10 @@ import { projects, todoContainer, ulTodoList } from './projects';
 
 function createTodo() {
 
-// console.log(projects);
-// base on array length? projects.length / position [0]?
-// for loop?
-// readProject function
-projects.forEach((proj) => {
-    // console.log(proj.name);
+    let projectIndex = 0;
 
-    // projects[index].todo.forEach((todo) => {
-    proj.todo.forEach((todo) => {
-        //li element for every todo
+    projects[projectIndex].todo.forEach((todo) => {
+         //li element for every todo
         const todoSingle = document.createElement('li');
         todoSingle.classList.add('todo-single');
         ulTodoList.appendChild(todoSingle);
@@ -45,7 +39,7 @@ projects.forEach((proj) => {
 
         const todoProjectName = document.createElement('div');
         todoProjectName.classList.add('todo-project-name');
-        todoProjectName.textContent = proj.name;
+        todoProjectName.textContent = projects[projectIndex].name;
         col2.appendChild(todoProjectName);
 
         const todoDescription = document.createElement('div');
@@ -75,7 +69,6 @@ projects.forEach((proj) => {
             'todo-icon-delete'
         );
         todoIconsContainer.appendChild(todoIconDelete);
-    });
 });
 }
 

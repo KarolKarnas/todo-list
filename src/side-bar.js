@@ -1,13 +1,21 @@
-import { projects, ulAllProjects } from './projects';
+import { projects, ulAllProjects, title } from './projects';
 
-// create navigation projects
+// create navigation projects with listeners
 
 function createProjectsList() {
-	projects.forEach((proj) => {
+	projects.forEach((proj, index) => {
 		const projectItemMenu = document.createElement('li');
 		projectItemMenu.textContent = proj.name;
-		// console.log(projectItemMenu);
 		ulAllProjects.appendChild(projectItemMenu);
+		
+		projectItemMenu.addEventListener('click', () => {
+			console.log(index, proj.name);
+			title.textContent = proj.name;
+			// clearMain()
+			// renderMain()
+			// title - proj.name
+			// todo - foreach of index
+		})
 	});
 }
 
