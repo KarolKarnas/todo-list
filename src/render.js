@@ -216,4 +216,18 @@ function closeModal(modal) {
 	overlay.classList.remove('active');
 }
 
+// project name radio
+
+document.querySelectorAll('[name="projectOption"]').forEach((radio) => {
+    radio.addEventListener("change", function() {
+      if (this.value === "project-name") {
+        document.getElementById("projectNameDiv").style.display = "block";
+        document.getElementById("selectProjectDiv").style.display = "none";
+      } else if (this.value === "selectProject") {
+        document.getElementById("projectNameDiv").style.display = "none";
+        document.getElementById("selectProjectDiv").style.display = "block";
+      }
+    });
+  });
+
 export { createTodo, createProjectsList, createALlTodo };

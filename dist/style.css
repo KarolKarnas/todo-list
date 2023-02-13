@@ -25,13 +25,13 @@
 	font-weight: 300;
 }
 
-input,
+/* input,
 button {
 	appearance: none;
 	border: none;
 	outline: none;
 	background: none;
-}
+} */
 
 #content {
 	height: 100vh;
@@ -156,7 +156,11 @@ header {
 
 .add-todo:hover {
 	cursor: pointer;
-	background-color: var(--white);
+	/* background-color: var(--white); */
+}
+
+.add-todo, .add-project {
+	background-color: var(--light-blue);
 }
 
 .sidebar-menu > li:hover {
@@ -301,6 +305,10 @@ main h1 {
 
 .form-row {
 	padding: 10px;
+}
+
+.form-row-radio {
+	height: 4rem;
 }
 
 .form-row #todo-title {
