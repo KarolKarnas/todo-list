@@ -235,24 +235,19 @@ const radioNewProject = document.getElementById('projectNameOption');
 const radioExistingProject = document.getElementById('selectProjectOption');
 
 // input new project or select existing one
-const projectNameInput = document.getElementById('project-name');
-const selectProject = document.getElementById('selectProject');
+const inputNewProject = document.getElementById('project-name');
+const inputSelectProject = document.getElementById('selectProject');
+
+//hide element depend on which radio button 
 
 radioButtonsProject.forEach((radio) => {
 	radio.addEventListener('change', function () {
 		if (this.value === 'project-name') {
 			projectNameDiv.style.display = 'block';
 			selectProjectDiv.style.display = 'none';
-
-			projectNameInput.setAttribute('data-check', 'new');
-			selectProject.removeAttribute('data-check');
-			// console.log(projectNameInput.dataset.check)
 		} else if (this.value === 'selectProject') {
 			projectNameDiv.style.display = 'none';
 			selectProjectDiv.style.display = 'block';
-			projectNameInput.removeAttribute('data-check');
-			selectProject.setAttribute('data-check', 'select');
-			// console.log(selectProject.dataset.check)
 		}
 	});
 });
@@ -264,7 +259,7 @@ const setExistingProjectsModal = function () {
 		let newOption = document.createElement('option');
 		newOption.textContent = proj.name;
 		newOption.setAttribute('value', `${proj.name}`);
-		selectProject.appendChild(newOption);
+		inputSelectProject.appendChild(newOption);
 	});
 };
 
@@ -274,10 +269,12 @@ export {
 	createTodo,
 	createProjectsList,
 	createALlTodo,
-	selectProject,
+	closeModal,
+	clearTodoList,
 	radioButtonsProject,
 	selectProjectDiv,
-	projectNameInput,
+	inputNewProject,
+	inputSelectProject,
 	radioNewProject,
 	radioExistingProject,
 

@@ -1,12 +1,20 @@
 import { projects } from './projects';
 import {
-	selectProject,
+	createProjectsList,
+	createALlTodo,
+    clearTodoList,
 	radioButtonsProject,
 	selectProjectDiv,
-	projectNameInput,
+	inputNewProject,
+	inputSelectProject,
 	radioNewProject,
 	radioExistingProject,
+	closeModal,
 } from './render';
+
+const createProject = (name, todo) => {
+	return { name, todo };
+};
 
 const createTodo = (
 	title,
@@ -28,22 +36,28 @@ console.log(testTodo);
 let submitButton = document.querySelector('#submit-btn');
 
 submitButton.addEventListener('click', (e) => {
-	// if (projectNameInput.dataset.check === 'new') {
-	// 	projects.push(projectNameInput.value);
-	// } else if (selectProject.dataset.check === 'select') {
-	//     console.log('select');
-	// }
-
 	if (radioNewProject.checked) {
-		console.log('new project');
+        let projectName = inputNewProject.value
+		// let newProject = createProject(projectName, todo);
+        // console.log(newProject);
+		// projects.push(newProject);
+		// console.log(inputNewProject.value);
 	} else if (radioExistingProject.checked) {
-		console.log('existing project');
+		projects.forEach((element, index) => {
+			if (element.name === inputSelectProject.value) {
+				projects[index].todo.push(testTodo);
+			}
+		});
 	}
 	console.table(projects);
+    clearTodoList();
+	createALlTodo();
+	createProjectsList();
+	closeModal(modal);
 	e.preventDefault();
 });
 
 // console.log(radioButtonsProjectOptions);
-// console.log(selectProject);
+// console.log(inputSelectProject);
 
 export {};
