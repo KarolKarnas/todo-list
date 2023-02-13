@@ -44,76 +44,41 @@ const projects = [
 
 
 // LOGIC.JS
-// project factory
-const createProject = ({ name = 'Unknown' } = {}) => {
-	return { name, todo: [] };
-};
-
-// push proj to projects
-function pushProject(proj) {
-	projects.push(proj);
-}
-
-let testProject = createProject();
-pushProject(testProject);
-// console.log(testProject);
-// console.log(projects);
-
-// todo factory with defaults
-const createTodo = ({
-	title = 'Unknown',
-	description = 'no description',
-	priority = 'p1',
-	checklist = false,
-} = {}) => {
-	return { title, description, dueDate, priority, checklist };
-};
-
-// push todo
-
-function pushTodo(indexNum, todo) {
-	projects[indexNum].todo.push(todo);
-}
-
-let testTodo = createTodo();
-console.log(testTodo);
-pushTodo(2, testTodo);
-
-// take input
-
-const createTodo2 = (title, description, projectName) => {
-	return { title, description, projectName };
-};
-
-console.log(createTodo2('brush', 'exactly', 'Maintenance'));
-
-const todoTitleInput = document.querySelector('#todo-title');
-const todoDescriptionInput = document.querySelector('#description');
-const todoProjectNameInput = document.querySelector('#project-name');
 
 
-function addTodoToProjectsArray(event) {
-	let newTodo = createTodo2(
-		todoTitleInput.value,
-		todoDescriptionInput.value,
-		todoProjectNameInput.value
-	);
 
-	console.log(newTodo);
-	event.preventDefault();
-}
+// const createTodo = (title, description, projectName, dueDate, priority, checked) => {
+// 	return { title, description, projectName, dueDate, priority, checked};
+// };
+
+// let testTodo = createTodo('brush', 'exactly', 'Maintenance');
+// console.log(testTodo);
+// // pushTodo(2, testTodo);
+
+// console.log('hello');
+
+// const todoTitleInput = document.querySelector('#todo-title');
+// const todoDescriptionInput = document.querySelector('#description');
+// const todoProjectNameInput = document.querySelector('#project-name');
+
+
+// function addTodoToProjectsArray(event) {
+// 	let newTodo = createTodo2(
+// 		todoTitleInput.value,
+// 		todoDescriptionInput.value,
+// 		todoProjectNameInput.value
+// 	);
+
+// 	event.preventDefault();
+// }
 
 //submit button
 
-let submitButton = document.querySelector('#submit-btn');
-console.log(submitButton);
+// let submitButton = document.querySelector('#submit-btn');
+// console.log(submitButton);
 
-// console.log('test');
-submitButton.addEventListener('click', addTodoToProjectsArray);
 
-// function clearMain() {
+// submitButton.addEventListener('click', addTodoToProjectsArray);
 
-// }
 
-// function createTodo()
 export { projects };

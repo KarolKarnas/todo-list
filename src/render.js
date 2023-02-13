@@ -116,24 +116,24 @@ function clearTodoList() {
 // class toggle on nav
 
 function selectAllLi() {
-	allLi = ulNav.querySelectorAll('li')
+	allLi = ulNav.querySelectorAll('li');
 }
 
 function removeLiActive() {
-	allLi.forEach(element => {
+	allLi.forEach((element) => {
 		element.classList.remove('li-active');
 	});
 }
 
 function addToggleClassOnLi() {
-allLi.forEach((element) => {
-	element.addEventListener('click', (e) => {
-		removeLiActive()
-		// element.classList.remove('li-active');
-		e.target.classList.add('li-active');
-		// console.log(e.target);
+	allLi.forEach((element) => {
+		element.addEventListener('click', (e) => {
+			removeLiActive();
+			// element.classList.remove('li-active');
+			e.target.classList.add('li-active');
+			// console.log(e.target);
+		});
 	});
-});
 }
 
 // create navigation projects li with listeners
@@ -144,8 +144,8 @@ function createProjectsList() {
 		projectItemMenu.textContent = proj.name;
 		liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
 		// toggle class active
-		selectAllLi()
-		addToggleClassOnLi()
+		selectAllLi();
+		addToggleClassOnLi();
 
 		// render content with according index number
 		projectItemMenu.addEventListener('click', () => {
@@ -216,18 +216,69 @@ function closeModal(modal) {
 	overlay.classList.remove('active');
 }
 
-// project name radio
+// project name radio buttons
 
-document.querySelectorAll('[name="projectOption"]').forEach((radio) => {
-    radio.addEventListener("change", function() {
-      if (this.value === "project-name") {
-        document.getElementById("projectNameDiv").style.display = "block";
-        document.getElementById("selectProjectDiv").style.display = "none";
-      } else if (this.value === "selectProject") {
-        document.getElementById("projectNameDiv").style.display = "none";
-        document.getElementById("selectProjectDiv").style.display = "block";
-      }
-    });
-  });
+// function getValue() {
+// 	const val = document.getElementById('project-name').value;
+// 	console.log(val);
+// }
 
-export { createTodo, createProjectsList, createALlTodo };
+const radioButtonsProject = document.querySelectorAll('[name="projectOption"]');
+
+//containers for input
+const projectNameDiv = document.getElementById('projectNameDiv');
+const selectProjectDiv = document.getElementById('selectProjectDiv');
+
+//input radio button
+const radioNewProject = document.getElementById('projectNameOption');
+
+const radioExistingProject = document.getElementById('selectProjectOption');
+
+// input new project or select existing one
+const projectNameInput = document.getElementById('project-name');
+const selectProject = document.getElementById('selectProject');
+
+radioButtonsProject.forEach((radio) => {
+	radio.addEventListener('change', function () {
+		if (this.value === 'project-name') {
+			projectNameDiv.style.display = 'block';
+			selectProjectDiv.style.display = 'none';
+
+			projectNameInput.setAttribute('data-check', 'new');
+			selectProject.removeAttribute('data-check');
+			// console.log(projectNameInput.dataset.check)
+		} else if (this.value === 'selectProject') {
+			projectNameDiv.style.display = 'none';
+			selectProjectDiv.style.display = 'block';
+			projectNameInput.removeAttribute('data-check');
+			selectProject.setAttribute('data-check', 'select');
+			// console.log(selectProject.dataset.check)
+		}
+	});
+});
+
+// create options from existing projects
+
+const setExistingProjectsModal = function () {
+	projects.forEach((proj) => {
+		let newOption = document.createElement('option');
+		newOption.textContent = proj.name;
+		newOption.setAttribute('value', `${proj.name}`);
+		selectProject.appendChild(newOption);
+	});
+};
+
+setExistingProjectsModal();
+
+export {
+	createTodo,
+	createProjectsList,
+	createALlTodo,
+	selectProject,
+	radioButtonsProject,
+	selectProjectDiv,
+	projectNameInput,
+	radioNewProject,
+	radioExistingProject,
+
+};
