@@ -10,17 +10,27 @@ import {
 	clearExistingProjectsModal,
 	radioButtonsProject,
 	selectProjectDiv,
-	inputNewProject,
-	inputSelectProject,
 	radioNewProject,
 	radioExistingProject,
 	closeModal,
+	
+	inputNewProject,
+	inputSelectProject,
 
 	inputTitle,
 	inputDescription,
 	inputDueDate,
 	inputPriority,
 } from './render';
+
+
+const clearInputs = function() {
+	inputNewProject.value  = '';
+	inputTitle.value = '';
+	inputDescription.value = '';
+	inputDueDate.value = '';
+	inputPriority.value = 'Priority 1';
+}
 
 //create project factory
 
@@ -81,6 +91,8 @@ submitButton.addEventListener('click', (e) => {
 
 	clearExistingProjectsModal();
 	createExistingProjectsModal();
+
+	clearInputs();
 
 	closeModal(modal);
 	e.preventDefault();
