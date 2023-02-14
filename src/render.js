@@ -98,7 +98,7 @@ function createTodo(projectIndex) {
 
 // render all todos
 
-function createALlTodo() {
+function createMainAllTodo() {
 	projects.forEach((element, index) => {
 		createTodo(index);
 	});
@@ -106,7 +106,7 @@ function createALlTodo() {
 
 // clear main
 
-function clearTodoList() {
+function clearMainTodoList() {
 	// ulTodoList.innerHTML = '';
 	while (ulTodoList.firstChild) {
 		ulTodoList.removeChild(ulTodoList.firstChild);
@@ -142,6 +142,7 @@ function createProjectsList() {
 	projects.forEach((proj, index) => {
 		const projectItemMenu = document.createElement('li');
 		projectItemMenu.textContent = proj.name;
+		projectItemMenu.classList.add('new-project');
 		liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
 		// toggle class active
 		selectAllLi();
@@ -151,7 +152,7 @@ function createProjectsList() {
 		projectItemMenu.addEventListener('click', () => {
 			// console.log(index, proj.name);
 			title.textContent = proj.name;
-			clearTodoList();
+			clearMainTodoList();
 			createTodo(index);
 			// renderMain()
 			// title - proj.name
@@ -164,9 +165,19 @@ function createProjectsList() {
 
 const allTodoLi = document.querySelector('#li-all-todo');
 allTodoLi.addEventListener('click', () => {
-	clearTodoList();
-	createALlTodo();
+	clearMainTodoList();
+	createMainAllTodo();
 });
+
+// clear Project list navigation
+
+function clearProjectsList() {
+	const allNewProject = document.querySelectorAll('.new-project');
+	// console.log(allNewProject);
+	allNewProject.forEach((proj) => {
+		proj.remove();
+	});
+}
 
 // add remove active on li items
 
@@ -238,7 +249,7 @@ const radioExistingProject = document.getElementById('selectProjectOption');
 const inputNewProject = document.getElementById('project-name');
 const inputSelectProject = document.getElementById('selectProject');
 
-//hide element depend on which radio button 
+//hide element depend on which radio button
 
 radioButtonsProject.forEach((radio) => {
 	radio.addEventListener('change', function () {
@@ -254,7 +265,7 @@ radioButtonsProject.forEach((radio) => {
 
 // create options from existing projects
 
-const setExistingProjectsModal = function () {
+const createExistingProjectsModal = function () {
 	projects.forEach((proj) => {
 		let newOption = document.createElement('option');
 		newOption.textContent = proj.name;
@@ -263,19 +274,28 @@ const setExistingProjectsModal = function () {
 	});
 };
 
-setExistingProjectsModal();
+// clear options with projects in modal
+
+const clearExistingProjectsModal = function () {
+	
+	while (inputSelectProject.firstChild) {
+		inputSelectProject.removeChild(inputSelectProject.firstChild);
+	}
+};
 
 export {
 	createTodo,
 	createProjectsList,
-	createALlTodo,
+	clearProjectsList,
+	createMainAllTodo,
+	clearMainTodoList,
+	createExistingProjectsModal,
+	clearExistingProjectsModal,
 	closeModal,
-	clearTodoList,
 	radioButtonsProject,
 	selectProjectDiv,
 	inputNewProject,
 	inputSelectProject,
 	radioNewProject,
 	radioExistingProject,
-
 };

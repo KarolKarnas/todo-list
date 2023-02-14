@@ -1,8 +1,13 @@
 import { projects } from './projects';
 import {
+	createMainAllTodo,
+    clearMainTodoList,
+
 	createProjectsList,
-	createALlTodo,
-    clearTodoList,
+	clearProjectsList,
+
+	createExistingProjectsModal,
+	clearExistingProjectsModal,
 	radioButtonsProject,
 	selectProjectDiv,
 	inputNewProject,
@@ -12,9 +17,14 @@ import {
 	closeModal,
 } from './render';
 
-const createProject = (name, todo) => {
-	return { name, todo };
+//create project factory
+
+const createProject = (name) => {
+	return { name, todo: [] };
 };
+
+const testProject = createProject('test Project');
+console.log(testProject);
 
 const createTodo = (
 	title,
@@ -28,7 +38,7 @@ const createTodo = (
 };
 
 let testTodo = createTodo('brush', 'exactly', 'Maintenance');
-console.log(testTodo);
+// console.log(testTodo);
 // pushTodo(2, testTodo);
 
 // submit button
@@ -37,8 +47,9 @@ let submitButton = document.querySelector('#submit-btn');
 
 submitButton.addEventListener('click', (e) => {
 	if (radioNewProject.checked) {
-        let projectName = inputNewProject.value
-		// let newProject = createProject(projectName, todo);
+		let projectName = inputNewProject.value
+		let newProject = createProject(projectName);
+		projects.push(newProject);
         // console.log(newProject);
 		// projects.push(newProject);
 		// console.log(inputNewProject.value);
@@ -50,9 +61,15 @@ submitButton.addEventListener('click', (e) => {
 		});
 	}
 	console.table(projects);
-    clearTodoList();
-	createALlTodo();
+    clearMainTodoList();
+	createMainAllTodo();
+
+	clearProjectsList();
 	createProjectsList();
+
+	clearExistingProjectsModal();
+	createExistingProjectsModal();
+
 	closeModal(modal);
 	e.preventDefault();
 });

@@ -1,7 +1,8 @@
-import { createTodo, createProjectsList,createALlTodo, }  from './render';
+import { createTodo, createProjectsList,createMainAllTodo, createExistingProjectsModal }  from './render';
 import { } from './logic'
 
-createALlTodo();
+createMainAllTodo();
 createProjectsList();
+createExistingProjectsModal();
 
 
