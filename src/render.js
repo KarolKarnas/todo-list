@@ -52,6 +52,13 @@ function createTodo(projectIndex) {
 		const todoCheck = document.createElement('input');
 		todoCheck.setAttribute('type', 'checkbox');
 		todoCheck.classList.add('checkbox');
+		todoCheck.checked = todo.checklist;
+		if (todo.checklist === true) {
+			todoSingle.classList.add('todo-done');
+		}
+		todoCheck.addEventListener('click', () => {
+			todoSingle.classList.toggle('todo-done');
+		});
 		col1.appendChild(todoCheck);
 
 		//content col2
@@ -75,18 +82,18 @@ function createTodo(projectIndex) {
 		todoPriority.classList.add('todo-priority');
 		switch (todo.priority) {
 			case 'Priority 1':
-			  todoPriority.classList.add('todo-priority-1');
-			  break;
+				todoPriority.classList.add('todo-priority-1');
+				break;
 			case 'Priority 2':
-			  todoPriority.classList.add('todo-priority-2');
-			  break;
+				todoPriority.classList.add('todo-priority-2');
+				break;
 			case 'Priority 3':
-			  todoPriority.classList.add('todo-priority-3');
-			  break;
+				todoPriority.classList.add('todo-priority-3');
+				break;
 			case 'Priority 4':
-			  todoPriority.classList.add('todo-priority-4');
-			  break;
-		  }
+				todoPriority.classList.add('todo-priority-4');
+				break;
+		}
 		todoPriority.textContent = todo.priority;
 		col2.appendChild(todoPriority);
 

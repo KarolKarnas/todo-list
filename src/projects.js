@@ -16,7 +16,7 @@ const projects = [
 					'Atque nisi doloremque tempore dicta porro, dolorum consectetur veniam perspiciatis error?',
 				dueDate: '2023-02-03',
 				priority: 'Priority 2',
-				checklist: false,
+				checklist: true,
 			},
 		],
 	},
