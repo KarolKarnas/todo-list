@@ -256,6 +256,24 @@ main h1 {
 	font-style: italic;
 }
 
+.todo-priority {
+	margin-top: 0.5rem;
+	font-weight: 500;
+}
+
+.todo-priority-1 {
+	color: var(--red);
+}
+.todo-priority-2 {
+	color: var(--light-red);
+}
+.todo-priority-3 {
+	color: var(--blue);
+}
+.todo-priority-4 {
+	color: var(--grey-light);
+}
+
 .todo-icons-container {
 	display: flex;
 	justify-content: end;

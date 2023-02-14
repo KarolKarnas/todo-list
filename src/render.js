@@ -71,10 +71,31 @@ function createTodo(projectIndex) {
 		todoDescription.textContent = todo.description;
 		col2.appendChild(todoDescription);
 
+		const todoPriority = document.createElement('div');
+		todoPriority.classList.add('todo-priority');
+		switch (todo.priority) {
+			case 'Priority 1':
+			  todoPriority.classList.add('todo-priority-1');
+			  break;
+			case 'Priority 2':
+			  todoPriority.classList.add('todo-priority-2');
+			  break;
+			case 'Priority 3':
+			  todoPriority.classList.add('todo-priority-3');
+			  break;
+			case 'Priority 4':
+			  todoPriority.classList.add('todo-priority-4');
+			  break;
+		  }
+		todoPriority.textContent = todo.priority;
+		col2.appendChild(todoPriority);
+
 		//content col3
 
 		const todoDate = document.createElement('input');
 		todoDate.setAttribute('type', 'date');
+		todoDate.value = todo.dueDate;
+		todoDate.setAttribute('disabled', true);
 		col3.appendChild(todoDate);
 
 		const todoIconsContainer = document.createElement('div');
@@ -277,11 +298,17 @@ const createExistingProjectsModal = function () {
 // clear options with projects in modal
 
 const clearExistingProjectsModal = function () {
-	
 	while (inputSelectProject.firstChild) {
 		inputSelectProject.removeChild(inputSelectProject.firstChild);
 	}
 };
+
+// variables for read modal
+
+const inputTitle = document.getElementById('todo-title');
+const inputDescription = document.getElementById('description');
+const inputDueDate = document.getElementById('dueDate');
+const inputPriority = document.getElementById('priority');
 
 export {
 	createTodo,
@@ -298,4 +325,8 @@ export {
 	inputSelectProject,
 	radioNewProject,
 	radioExistingProject,
+	inputTitle,
+	inputDescription,
+	inputDueDate,
+	inputPriority,
 };

@@ -15,6 +15,11 @@ import {
 	radioNewProject,
 	radioExistingProject,
 	closeModal,
+
+	inputTitle,
+	inputDescription,
+	inputDueDate,
+	inputPriority,
 } from './render';
 
 //create project factory
@@ -26,37 +31,44 @@ const createProject = (name) => {
 const testProject = createProject('test Project');
 console.log(testProject);
 
+// create todo factory
+
 const createTodo = (
 	title,
 	description,
-	projectName,
 	dueDate,
 	priority,
-	checked
+	
 ) => {
-	return { title, description, projectName, dueDate, priority, checked };
+	return { title, description, dueDate, priority, checklist: false };
 };
 
-let testTodo = createTodo('brush', 'exactly', 'Maintenance');
+// let testTodo = createTodo('brush', 'exactly', 'Maintenance');
 // console.log(testTodo);
 // pushTodo(2, testTodo);
 
-// submit button
 
+// submit button
 let submitButton = document.querySelector('#submit-btn');
 
 submitButton.addEventListener('click', (e) => {
+	let newTodo = createTodo(inputTitle.value,
+		inputDescription.value,
+		inputDueDate.value,
+		inputPriority.value)
+	
 	if (radioNewProject.checked) {
-		let projectName = inputNewProject.value
-		let newProject = createProject(projectName);
+		// let projectName = inputNewProject.value
+		let newProject = createProject(inputNewProject.value);
+		newProject.todo.push(newTodo);
 		projects.push(newProject);
-        // console.log(newProject);
-		// projects.push(newProject);
-		// console.log(inputNewProject.value);
+
+
+
 	} else if (radioExistingProject.checked) {
 		projects.forEach((element, index) => {
 			if (element.name === inputSelectProject.value) {
-				projects[index].todo.push(testTodo);
+				projects[index].todo.push(newTodo);
 			}
 		});
 	}
