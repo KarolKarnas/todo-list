@@ -41,21 +41,21 @@
 					<input
 						type="radio"
 						name="projectOption"
-						id="projectNameOption"
-						value="project-name"
+						id="selectProjectOption"
+						value="selectProject"
 						checked
 					/>
-					<label for="projectNameOption">Enter Project Name</label>
+					<label for="selectProjectOption">Select Project</label>
 
 					<input
 						type="radio"
 						name="projectOption"
-						id="selectProjectOption"
-						value="selectProject"
+						id="projectNameOption"
+						value="project-name"
 					/>
-					<label for="selectProjectOption">Select Project</label>
+					<label for="projectNameOption">New Project</label>
 
-					<div id="projectNameDiv" style="display: block">
+					<div id="projectNameDiv" style="display: none">
 						<input
 							type="text"
 							name="project-name"
@@ -65,7 +65,7 @@
 						/>
 					</div>
 
-					<div id="selectProjectDiv" style="display: none">
+					<div id="selectProjectDiv" style="display: block">
 						<label for="selectProject">Project</label>
 
 						<select name="selectProject" id="selectProject">
@@ -99,8 +99,22 @@
 				</div> -->
 
 				<div class="form-row-button">
-					<button class="form-btn" id="submit-btn" type="submit" style="display: none">SUBMIT</button>
-					<button class="form-btn" id="edit-btn" type="submit" style="display: none">EDIT</button>
+					<button
+						class="form-btn"
+						id="submit-btn"
+						type="submit"
+						style="display: none"
+					>
+						SUBMIT
+					</button>
+					<button
+						class="form-btn"
+						id="edit-btn"
+						type="submit"
+						style="display: none"
+					>
+						EDIT
+					</button>
 					<button
 						data-close-button
 						class="close-button form-btn"

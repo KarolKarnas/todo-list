@@ -85,11 +85,42 @@ submitButton.addEventListener('click', (e) => {
 const editButton = document.querySelector('#edit-btn');
 
 editButton.addEventListener('click', (e) => {
-	// console.log('test');
-
-	// console.log(currentEditTodoIndex, currentEditProjectIndex);
 	deleteCurrentTodo(currentEditProjectIndex, currentEditTodoIndex);
-	
+	// push a the same place in array
+	//bulk function
+	let newTodo = createTodo(
+		inputTitle.value,
+		inputDescription.value,
+		inputDueDate.value,
+		inputPriority.value
+	);
+
+	if (radioNewProject.checked) {
+		// let projectName = inputNewProject.value
+		let newProject = createProject(inputNewProject.value);
+		newProject.todo.push(newTodo);
+		projects.push(newProject);
+	} else if (radioExistingProject.checked) {
+		projects[currentEditProjectIndex].todo.splice(
+			currentEditTodoIndex,
+			0,
+			newTodo
+		);
+	}
+
+	console.table(projects);
+	clearMainTodoList();
+	createMainAllTodo();
+
+	clearProjectsList();
+	createProjectsList();
+
+	clearExistingProjectsModal();
+	createExistingProjectsModal();
+
+	clearInputs();
+
+	closeModal(modal);
 
 	e.preventDefault();
 });
