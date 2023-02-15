@@ -287,11 +287,18 @@ main h1 {
 .todo-icon-edit {
 	font-size: 1.3rem;
 	color: var(--blue);
+	padding: 5px;
 }
 
 .todo-icon-delete {
 	font-size: 1.3rem;
 	color: var(--light-red);
+	padding: 5px;
+}
+
+.todo-icon-edit:hover, .todo-icon-delete:hover {
+	background-color: var(--light-blue);
+	cursor: pointer;
 }
 
 /* MODAL  */

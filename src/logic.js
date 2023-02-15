@@ -8,6 +8,8 @@ import {
 
 	createExistingProjectsModal,
 	clearExistingProjectsModal,
+
+	clearInputs,
 	radioButtonsProject,
 	selectProjectDiv,
 	radioNewProject,
@@ -24,13 +26,7 @@ import {
 } from './render';
 
 
-const clearInputs = function() {
-	inputNewProject.value  = '';
-	inputTitle.value = '';
-	inputDescription.value = '';
-	inputDueDate.value = '';
-	inputPriority.value = 'Priority 1';
-}
+
 
 //create project factory
 
@@ -38,8 +34,8 @@ const createProject = (name) => {
 	return { name, todo: [] };
 };
 
-const testProject = createProject('test Project');
-console.log(testProject);
+// const testProject = createProject('test Project');
+// console.log(testProject);
 
 // create todo factory
 
@@ -59,7 +55,7 @@ const createTodo = (
 
 
 // submit button
-let submitButton = document.querySelector('#submit-btn');
+const submitButton = document.querySelector('#submit-btn');
 
 submitButton.addEventListener('click', (e) => {
 	let newTodo = createTodo(inputTitle.value,
@@ -98,7 +94,11 @@ submitButton.addEventListener('click', (e) => {
 	e.preventDefault();
 });
 
+// edit button
+const editButton = document.querySelector('#edit-btn');
+
+
 // console.log(radioButtonsProjectOptions);
 // console.log(inputSelectProject);
 
-export {};
+export { submitButton, editButton };

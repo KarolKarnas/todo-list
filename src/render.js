@@ -1,4 +1,5 @@
 import { projects } from './projects';
+import { submitButton, editButton } from './logic';
 
 //GLOBAL
 // SELECT VARIABLES
@@ -112,6 +113,15 @@ function createTodo(projectIndex) {
 		const todoIconEdit = document.createElement('i');
 		todoIconEdit.textContent = 'edit';
 		todoIconEdit.classList.add('material-symbols-outlined', 'todo-icon-edit');
+		//################
+		todoIconEdit.addEventListener('click', () => {
+			// const modal2 = document.getElementById('modal');
+			editButton.style.display = 'inherit';
+			openModal(modal);
+			populateInputValues(projectIndex, todo);
+			console.log(projectIndex);
+			console.log(todo);
+		});
 		todoIconsContainer.appendChild(todoIconEdit);
 
 		const todoIconDelete = document.createElement('i');
@@ -225,6 +235,7 @@ const overlay = document.getElementById('overlay');
 openModalButtons.forEach((button) => {
 	button.addEventListener('click', () => {
 		const modal = document.querySelector(button.dataset.modalTarget);
+		submitButton.style.display = 'inherit';
 		openModal(modal);
 	});
 });
@@ -251,6 +262,9 @@ function openModal(modal) {
 
 function closeModal(modal) {
 	if (modal == null) return;
+	submitButton.style.display = 'none';
+	editButton.style.display = 'none';
+	clearInputs();
 	modal.classList.remove('active');
 	overlay.classList.remove('active');
 }
@@ -317,6 +331,25 @@ const inputDescription = document.getElementById('description');
 const inputDueDate = document.getElementById('dueDate');
 const inputPriority = document.getElementById('priority');
 
+// clear modal inputs
+
+const clearInputs = function () {
+	inputNewProject.value = '';
+	inputTitle.value = '';
+	inputDescription.value = '';
+	inputDueDate.value = '';
+	inputPriority.value = 'Priority 1';
+};
+
+function populateInputValues(index, todo) {
+	inputNewProject.value = projects[index].name;
+	inputSelectProject.value = projects[index].name;
+	inputTitle.value = todo.title;
+	inputDescription.value = todo.description;
+	inputDueDate.value = todo.dueDate;
+	inputPriority.value = todo.priority;
+}
+
 export {
 	createTodo,
 	createProjectsList,
@@ -325,6 +358,7 @@ export {
 	clearMainTodoList,
 	createExistingProjectsModal,
 	clearExistingProjectsModal,
+	clearInputs,
 	closeModal,
 	radioButtonsProject,
 	selectProjectDiv,
