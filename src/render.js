@@ -109,7 +109,7 @@ function createTodo(projectIndex) {
 		const todoIconsContainer = document.createElement('div');
 		todoIconsContainer.classList.add('todo-icons-container');
 		col3.appendChild(todoIconsContainer);
-
+		//EDIT ICON
 		const todoIconEdit = document.createElement('i');
 		todoIconEdit.textContent = 'edit';
 		todoIconEdit.classList.add('material-symbols-outlined', 'todo-icon-edit');
@@ -119,17 +119,26 @@ function createTodo(projectIndex) {
 			editButton.style.display = 'inherit';
 			openModal(modal);
 			populateInputValues(projectIndex, todo);
-			console.log(projectIndex);
-			console.log(todo);
+			// console.log(projectIndex);
+			// console.log(todo);
+			let currentEditTodoIndex = projects[projectIndex].todo.indexOf(todo);
+			console.log(currentEditTodoIndex);
 		});
 		todoIconsContainer.appendChild(todoIconEdit);
-
+		//DELETE ICON
 		const todoIconDelete = document.createElement('i');
 		todoIconDelete.textContent = 'delete';
 		todoIconDelete.classList.add(
 			'material-symbols-outlined',
 			'todo-icon-delete'
 		);
+		todoIconDelete.addEventListener('click', () => {
+			deleteCurrentTodo(projectIndex, todo);
+			clearMainTodoList();
+			createMainAllTodo();
+			// console.log(currentDeleteTodoIndex);
+			// console.log(projects);
+		});
 		todoIconsContainer.appendChild(todoIconDelete);
 	});
 }
@@ -341,13 +350,18 @@ const clearInputs = function () {
 	inputPriority.value = 'Priority 1';
 };
 
-function populateInputValues(index, todo) {
-	inputNewProject.value = projects[index].name;
-	inputSelectProject.value = projects[index].name;
+function populateInputValues(projIndex, todo) {
+	inputNewProject.value = projects[projIndex].name;
+	inputSelectProject.value = projects[projIndex].name;
 	inputTitle.value = todo.title;
 	inputDescription.value = todo.description;
 	inputDueDate.value = todo.dueDate;
 	inputPriority.value = todo.priority;
+}
+
+function deleteCurrentTodo(projIndex, todo) {
+	let currentDeleteTodoIndex = projects[projIndex].todo.indexOf(todo);
+	projects[projIndex].todo.splice(currentDeleteTodoIndex, 1);
 }
 
 export {
