@@ -1,6 +1,10 @@
 import { projects } from './projects';
 import { submitButton, editButton } from './logic';
 
+//current edit todo coordinates in global scope
+let currentEditTodoIndex;
+let currentEditProjectIndex;
+
 //GLOBAL
 // SELECT VARIABLES
 const main = document.querySelector('#main');
@@ -119,10 +123,10 @@ function createTodo(projectIndex) {
 			editButton.style.display = 'inherit';
 			openModal(modal);
 			populateInputValues(projectIndex, todo);
-			// console.log(projectIndex);
-			// console.log(todo);
-			let currentEditTodoIndex = projects[projectIndex].todo.indexOf(todo);
-			console.log(currentEditTodoIndex);
+			currentEditProjectIndex = projectIndex;
+			currentEditTodoIndex = projects[projectIndex].todo.indexOf(todo);
+			
+
 		});
 		todoIconsContainer.appendChild(todoIconEdit);
 		//DELETE ICON
@@ -133,7 +137,9 @@ function createTodo(projectIndex) {
 			'todo-icon-delete'
 		);
 		todoIconDelete.addEventListener('click', () => {
-			deleteCurrentTodo(projectIndex, todo);
+			currentEditProjectIndex = projectIndex;
+			currentEditTodoIndex = projects[projectIndex].todo.indexOf(todo);
+			deleteCurrentTodo(currentEditProjectIndex, currentEditTodoIndex);
 			clearMainTodoList();
 			createMainAllTodo();
 			// console.log(currentDeleteTodoIndex);
@@ -359,9 +365,12 @@ function populateInputValues(projIndex, todo) {
 	inputPriority.value = todo.priority;
 }
 
-function deleteCurrentTodo(projIndex, todo) {
-	let currentDeleteTodoIndex = projects[projIndex].todo.indexOf(todo);
-	projects[projIndex].todo.splice(currentDeleteTodoIndex, 1);
+// function deleteCurrentTodo(projIndex, todo) {
+// 	let currentDeleteTodoIndex = projects[projIndex].todo.indexOf(todo);
+// 	projects[projIndex].todo.splice(currentDeleteTodoIndex, 1);
+// }
+function deleteCurrentTodo(projIndex, todoIndex) {
+	projects[projIndex].todo.splice(todoIndex, 1);
 }
 
 export {
@@ -372,6 +381,8 @@ export {
 	clearMainTodoList,
 	createExistingProjectsModal,
 	clearExistingProjectsModal,
+
+	deleteCurrentTodo,
 	clearInputs,
 	closeModal,
 	radioButtonsProject,
@@ -384,4 +395,8 @@ export {
 	inputDescription,
 	inputDueDate,
 	inputPriority,
+
+	currentEditTodoIndex,
+	currentEditProjectIndex
+
 };

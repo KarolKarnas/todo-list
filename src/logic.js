@@ -1,32 +1,27 @@
 import { projects } from './projects';
 import {
 	createMainAllTodo,
-    clearMainTodoList,
-
+	clearMainTodoList,
 	createProjectsList,
 	clearProjectsList,
-
 	createExistingProjectsModal,
 	clearExistingProjectsModal,
-
+	deleteCurrentTodo,
 	clearInputs,
 	radioButtonsProject,
 	selectProjectDiv,
 	radioNewProject,
 	radioExistingProject,
 	closeModal,
-	
 	inputNewProject,
 	inputSelectProject,
-
 	inputTitle,
 	inputDescription,
 	inputDueDate,
 	inputPriority,
+	currentEditTodoIndex,
+	currentEditProjectIndex,
 } from './render';
-
-
-
 
 //create project factory
 
@@ -39,13 +34,7 @@ const createProject = (name) => {
 
 // create todo factory
 
-const createTodo = (
-	title,
-	description,
-	dueDate,
-	priority,
-	
-) => {
+const createTodo = (title, description, dueDate, priority) => {
 	return { title, description, dueDate, priority, checklist: false };
 };
 
@@ -53,24 +42,22 @@ const createTodo = (
 // console.log(testTodo);
 // pushTodo(2, testTodo);
 
-
 // submit button
 const submitButton = document.querySelector('#submit-btn');
 
 submitButton.addEventListener('click', (e) => {
-	let newTodo = createTodo(inputTitle.value,
+	let newTodo = createTodo(
+		inputTitle.value,
 		inputDescription.value,
 		inputDueDate.value,
-		inputPriority.value)
-	
+		inputPriority.value
+	);
+
 	if (radioNewProject.checked) {
 		// let projectName = inputNewProject.value
 		let newProject = createProject(inputNewProject.value);
 		newProject.todo.push(newTodo);
 		projects.push(newProject);
-
-
-
 	} else if (radioExistingProject.checked) {
 		projects.forEach((element, index) => {
 			if (element.name === inputSelectProject.value) {
@@ -79,7 +66,7 @@ submitButton.addEventListener('click', (e) => {
 		});
 	}
 	console.table(projects);
-    clearMainTodoList();
+	clearMainTodoList();
 	createMainAllTodo();
 
 	clearProjectsList();
@@ -97,8 +84,14 @@ submitButton.addEventListener('click', (e) => {
 // edit button
 const editButton = document.querySelector('#edit-btn');
 
+editButton.addEventListener('click', (e) => {
+	// console.log('test');
 
-// console.log(radioButtonsProjectOptions);
-// console.log(inputSelectProject);
+	// console.log(currentEditTodoIndex, currentEditProjectIndex);
+	deleteCurrentTodo(currentEditProjectIndex, currentEditTodoIndex);
+	
+
+	e.preventDefault();
+});
 
 export { submitButton, editButton };
