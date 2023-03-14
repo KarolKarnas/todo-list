@@ -243,46 +243,46 @@ function clearProjectsList() {
 
 // MODAL
 
-const openModalButtons = document.querySelectorAll('[data-modal-target]');
-const closeModalButtons = document.querySelectorAll('[data-close-button]');
-const overlay = document.getElementById('overlay');
+// const openModalButtons = document.querySelectorAll('[data-modal-target]');
+// const closeModalButtons = document.querySelectorAll('[data-close-button]');
+// const overlay = document.getElementById('overlay');
 
-openModalButtons.forEach((button) => {
-	button.addEventListener('click', () => {
-		const modal = document.querySelector(button.dataset.modalTarget);
-		submitButton.style.display = 'inherit';
-		openModal(modal);
-	});
-});
+// openModalButtons.forEach((button) => {
+// 	button.addEventListener('click', () => {
+// 		const modal = document.querySelector(button.dataset.modalTarget);
+// 		submitButton.style.display = 'inherit';
+// 		openModal(modal);
+// 	});
+// });
 
-overlay.addEventListener('click', () => {
-	const modals = document.querySelectorAll('.modal.active');
-	modals.forEach((modal) => {
-		closeModal(modal);
-	});
-});
+// overlay.addEventListener('click', () => {
+// 	const modals = document.querySelectorAll('.modal.active');
+// 	modals.forEach((modal) => {
+// 		closeModal(modal);
+// 	});
+// });
 
-closeModalButtons.forEach((button) => {
-	button.addEventListener('click', () => {
-		const modal = button.closest('.modal');
-		closeModal(modal);
-	});
-});
+// closeModalButtons.forEach((button) => {
+// 	button.addEventListener('click', () => {
+// 		const modal = button.closest('.modal');
+// 		closeModal(modal);
+// 	});
+// });
 
-function openModal(modal) {
-	if (modal == null) return;
-	modal.classList.add('active');
-	overlay.classList.add('active');
-}
+// function openModal(modal) {
+// 	if (modal == null) return;
+// 	modal.classList.add('active');
+// 	overlay.classList.add('active');
+// }
 
-function closeModal(modal) {
-	if (modal == null) return;
-	submitButton.style.display = 'none';
-	editButton.style.display = 'none';
-	clearInputs();
-	modal.classList.remove('active');
-	overlay.classList.remove('active');
-}
+// function closeModal(modal) {
+// 	if (modal == null) return;
+// 	submitButton.style.display = 'none';
+// 	editButton.style.display = 'none';
+// 	clearInputs();
+// 	modal.classList.remove('active');
+// 	overlay.classList.remove('active');
+// }
 
 // project name radio buttons
 
@@ -384,7 +384,7 @@ export {
 
 	deleteCurrentTodo,
 	clearInputs,
-	closeModal,
+	// closeModal,
 	radioButtonsProject,
 	selectProjectDiv,
 	inputNewProject,
