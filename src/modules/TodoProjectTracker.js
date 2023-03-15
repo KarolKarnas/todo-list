@@ -3,8 +3,10 @@ import Storage from './Storage';
 
 class TodoProjectsTracker {
 	constructor() {
-		this._todos = Storage.getTodos();
+		this._todos = Storage.getProjects();
 		this._projects = Storage.getProjects();
+
+		this._checkEmpty()
 	}
 
 	//public
@@ -20,7 +22,7 @@ class TodoProjectsTracker {
 
 	//private
 
-    _displayTodo(todo) {
+    _displayTodo(todo, projIndex) {
         const ul = document.getElementById('todo-list');
 		const todoLi = document.createElement('li');
 		todoLi.classList.add('todo-single')
@@ -31,7 +33,7 @@ class TodoProjectsTracker {
 	</div>
 	<div class="col-2">
 		<div class="todo-title">${todo.title}</div>
-		<div class="todo-project-name">Problem!</div>
+		<div class="todo-project-name">${this._projects[projIndex].name}</div>
 		<div class="todo-description">
 		${todo.description}
 		</div>
@@ -49,10 +51,64 @@ console.log(todoLi);
 	ul.appendChild(todoLi);
     }
 
-	loadTodos(){
-		this._todos.forEach(todo => {
-			this._displayTodo(todo)
+	_displayProjectMenu() {
+		this._projects.forEach((proj, index) => {
+			const liAllProjects = document.querySelector('#all-projects');
+			const projectItemMenu = document.createElement('li');
+			projectItemMenu.textContent = proj.name;
+			projectItemMenu.classList.add('new-project');
+			projectItemMenu.setAttribute('data-id', proj.id);
+			liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
+			// toggle class active
+			// selectAllLi();
+			// addToggleClassOnLi();
+	
+			// render content with according index number
+			projectItemMenu.addEventListener('click', () => {
+				title.textContent = proj.name;
+				// clearMainTodoList();
+				// createTodo(index);
+			});
 		});
+	}
+
+	_updateModalExistingProjects() {
+		const inputSelectProject = document.getElementById('selectProject');
+		this._projects.forEach((proj) => {
+			let newOption = document.createElement('option');
+			newOption.textContent = proj.name;
+			newOption.setAttribute('value', `${proj.name}`);
+			newOption.setAttribute('data-id', `${proj.id}`)
+			inputSelectProject.appendChild(newOption);
+		});
+	}
+
+	_checkEmpty() {
+	
+		if (this._todos.length === 0)	{  Storage.saveProject({id: 'bef36e0e1b027', name: 'FIX the World2', todo: []})
+		Storage.saveTodo(0, {
+			id: 'ca079bdcb9ba2',
+			title: 'Rebuild Houses',
+			description:
+				'Atque',
+			dueDate: '2023-02-03',
+			priority: 'Priority 2',
+			checklist: true,
+		})
+	}
+}
+
+
+
+	loadTodos(projIndex) {
+this._updateModalExistingProjects()
+		this._projects[projIndex].todo.forEach(todo => {
+			this._displayTodo(todo, projIndex)
+		});
+	}
+
+	_render(projIndex) {
+
 	}
 }
 

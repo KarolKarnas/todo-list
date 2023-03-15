@@ -1,8 +1,10 @@
+import Todo from "./Todo";
+
 class Project {
-	constructor(title = 'Deafult Project Title') {
+	constructor(name = 'Deafult Project Title') {
 		this.id = Math.random().toString(16).slice(2);
-        this.title = title;
-		this.todos = [];
+        this.name = name;
+		this.todo = [];
 	}
 }
 
