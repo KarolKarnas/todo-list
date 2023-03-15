@@ -11,13 +11,20 @@ class TodoProjectsTracker {
 
 	//public
 
-	addTodo(todo) {
-		this._todos.push(todo);
-		this._displayTodo(todo);
+	addTodoToProject(index, todo) {
+		this._projects[index].todo.push(todo);
+		Storage.saveTodo(index, todo);
 	}
+
+	// addTodo(todo) {
+	// 	// this._todos.push(todo);
+	// 	// this._displayTodo(todo);
+	// 	console.log(todo);
+	// }
 
 	addProject(project) {
 		this._projects.push(project);
+		Storage.saveProject(project);
 	}
 
 	//private
@@ -98,14 +105,18 @@ console.log(todoLi);
 	}
 }
 
-
-
-	loadTodos(projIndex) {
-this._updateModalExistingProjects()
-		this._projects[projIndex].todo.forEach(todo => {
-			this._displayTodo(todo, projIndex)
-		});
+loadTodos() {
+	this._updateModalExistingProjects()
+			this._projects.forEach((proj, index) => proj.todo.forEach(todo => this._displayTodo(todo, index)))
 	}
+
+
+// 	loadTodos(projIndex) {
+// this._updateModalExistingProjects()
+// 		this._projects[projIndex].todo.forEach(todo => {
+// 			this._displayTodo(todo, projIndex)
+// 		});
+// 	}
 
 	_render(projIndex) {
 

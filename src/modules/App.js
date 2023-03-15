@@ -1,3 +1,4 @@
+import Project from './Project';
 import Todo from './Todo';
 import TodoProjectsTracker from './TodoProjectTracker';
 
@@ -5,11 +6,10 @@ class App {
 	constructor() {
 		this._tracker = new TodoProjectsTracker();
 		this._loadModal();
-		this._tracker.loadTodos(0);
+		this._tracker.loadTodos();
 		this._tracker._displayProjectMenu();
 		//     this._tracker.addTodo(new Todo)
 		console.log(this._tracker);
-		// console.log('hello')
 
 		document
 			.querySelector('#submit-btn')
@@ -105,15 +105,14 @@ class App {
 		);
 
 		if (radioNewProject.checked) {
-			let newProject = createProject(inputNewProject.value);
+			let newProject = new Project(inputNewProject.value);
 			newProject.todo.push(newTodo);
-			// traker addProject addTodo
-			projects.push(newProject);
+
+			this._tracker.addProject(newProject);
 		} else if (radioExistingProject.checked) {
 			this._tracker._projects.forEach((proj, index) => {
 				if (proj.name === inputSelectProject.value) {
-					this._tracker._projects[index].todo.push(newTodo);
-					// this._tracker._projects[index].addTODo
+					this._tracker.addTodoToProject(index, newTodo);
 				}
 
 				console.log(this._tracker._projects);
