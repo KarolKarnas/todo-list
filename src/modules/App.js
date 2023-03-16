@@ -7,20 +7,24 @@ class App {
 		this._tracker = new TodoProjectsTracker();
 		this._loadModal();
 		this._tracker.loadTodos();
-		this._tracker._displayProjectMenu();
+		this._tracker._createExistingProjectsModal();
+		this._tracker._createProjectsList();
 		//     this._tracker.addTodo(new Todo)
-		console.log(this._tracker);
+		// console.log(this._tracker);
 
 		document
 			.querySelector('#submit-btn')
 			.addEventListener('click', this._newTodo.bind(this));
+
+		document.querySelector('#li-all-todo').addEventListener('click', () => this._tracker.loadTodos())
 	}
 	_loadModal() {
 		document.querySelectorAll('[data-modal-target]').forEach((button) => {
-			button.addEventListener('click', () => {
+			button.addEventListener('click', (e) => {
 				const modal = document.querySelector(button.dataset.modalTarget);
 				// submitButton.style.display = 'inherit';
 				this._openModal(modal);
+				e.stopPropagation()
 			});
 		});
 		document.querySelectorAll('[data-close-button]').forEach((button) => {
@@ -106,18 +110,23 @@ class App {
 
 		if (radioNewProject.checked) {
 			let newProject = new Project(inputNewProject.value);
-			newProject.todo.push(newTodo);
+			// newProject.todo.push(newTodo);
 
 			this._tracker.addProject(newProject);
+			this._tracker.addTodoToProject(this._tracker._projects.length - 1, newTodo);
+
+
 		} else if (radioExistingProject.checked) {
 			this._tracker._projects.forEach((proj, index) => {
 				if (proj.name === inputSelectProject.value) {
 					this._tracker.addTodoToProject(index, newTodo);
+					// console.log(index);
 				}
 
-				console.log(this._tracker._projects);
+		
 			});
 		}
+		this._closeModal(modal)
 	}
 }
 

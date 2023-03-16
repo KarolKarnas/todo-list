@@ -6,7 +6,7 @@ class TodoProjectsTracker {
 		this._todos = Storage.getProjects();
 		this._projects = Storage.getProjects();
 
-		this._checkEmpty()
+		this._checkEmpty();
 	}
 
 	//public
@@ -14,13 +14,8 @@ class TodoProjectsTracker {
 	addTodoToProject(index, todo) {
 		this._projects[index].todo.push(todo);
 		Storage.saveTodo(index, todo);
+		this._render(index);
 	}
-
-	// addTodo(todo) {
-	// 	// this._todos.push(todo);
-	// 	// this._displayTodo(todo);
-	// 	console.log(todo);
-	// }
 
 	addProject(project) {
 		this._projects.push(project);
@@ -29,13 +24,14 @@ class TodoProjectsTracker {
 
 	//private
 
-    _displayTodo(todo, projIndex) {
-        const ul = document.getElementById('todo-list');
+	_displayTodo(todo, projIndex) {
+		const ul = document.getElementById('todo-list');
 		const todoLi = document.createElement('li');
-		todoLi.classList.add('todo-single')
+		todoLi.classList.add('todo-single');
 		todoLi.setAttribute('data-id', todo.id);
-		
-		todoLi.innerHTML = `<div class="col-1">
+
+		todoLi.innerHTML = `
+		<div class="col-1">
 		<input class="checkbox" type="checkbox" />
 	</div>
 	<div class="col-2">
@@ -52,74 +48,119 @@ class TodoProjectsTracker {
 			<i class="material-symbols-outlined todo-icon-edit">edit</i>
 			<i class="material-symbols-outlined todo-icon-delete">delete</i>
 		</div>
-	</div>`
-	
-console.log(todoLi);
-	ul.appendChild(todoLi);
-    }
+	</div>`;
 
-	_displayProjectMenu() {
+		// console.log(todoLi);
+		ul.appendChild(todoLi);
+	}
+
+	_createExistingProjectsModal() {
+		const inputSelectProject = document.getElementById('selectProject');
+		this._projects.forEach((proj) => {
+			let newOption = document.createElement('option');
+			newOption.textContent = proj.name;
+			newOption.setAttribute('value', `${proj.name}`);
+			newOption.setAttribute('data-id', `${proj.id}`);
+			inputSelectProject.appendChild(newOption);
+		});
+	}
+
+	_clearExistingProjectsModal() {
+		const inputSelectProject = document.getElementById('selectProject');
+		while (inputSelectProject.firstChild) {
+			inputSelectProject.removeChild(inputSelectProject.firstChild);
+		}
+	}
+
+	_checkEmpty() {
+		if (this._todos.length === 0) {
+			Storage.saveProject({
+				id: 'bef36e0e1b027',
+				name: 'FIX the World2',
+				todo: [],
+			});
+			Storage.saveTodo(0, {
+				id: 'ca079bdcb9ba2',
+				title: 'Rebuild Houses',
+				description: 'Atque',
+				dueDate: '2023-02-03',
+				priority: 'Priority 2',
+				checklist: true,
+			});
+		}
+	}
+
+	// 	loadTodos(projIndex) {
+	// this._createExistingProjectsModal()
+	// 		this._projects[projIndex].todo.forEach(todo => {
+	// 			this._displayTodo(todo, projIndex)
+	// 		});
+	// 	}
+
+	_clearMainTodoList() {
+		const ulTodoList = document.getElementById('todo-list');
+		while (ulTodoList.firstChild) {
+			ulTodoList.removeChild(ulTodoList.firstChild);
+		}
+	}
+
+	_createProjectsList() {
 		this._projects.forEach((proj, index) => {
 			const liAllProjects = document.querySelector('#all-projects');
 			const projectItemMenu = document.createElement('li');
 			projectItemMenu.textContent = proj.name;
 			projectItemMenu.classList.add('new-project');
 			projectItemMenu.setAttribute('data-id', proj.id);
+			projectItemMenu.setAttribute('data-project-Index', index);
 			liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
+
 			// toggle class active
 			// selectAllLi();
 			// addToggleClassOnLi();
-	
 			// render content with according index number
-			projectItemMenu.addEventListener('click', () => {
-				title.textContent = proj.name;
+			projectItemMenu.addEventListener('click', (e) => {
+				// title.textContent = proj.name;
+				this._render(e.target.dataset.projectIndex);
 				// clearMainTodoList();
 				// createTodo(index);
 			});
 		});
 	}
 
-	_updateModalExistingProjects() {
-		const inputSelectProject = document.getElementById('selectProject');
-		this._projects.forEach((proj) => {
-			let newOption = document.createElement('option');
-			newOption.textContent = proj.name;
-			newOption.setAttribute('value', `${proj.name}`);
-			newOption.setAttribute('data-id', `${proj.id}`)
-			inputSelectProject.appendChild(newOption);
+	_clearProjectsList() {
+		const allNewProject = document.querySelectorAll('.new-project');
+		allNewProject.forEach((proj) => {
+			proj.remove();
 		});
 	}
 
-	_checkEmpty() {
-	
-		if (this._todos.length === 0)	{  Storage.saveProject({id: 'bef36e0e1b027', name: 'FIX the World2', todo: []})
-		Storage.saveTodo(0, {
-			id: 'ca079bdcb9ba2',
-			title: 'Rebuild Houses',
-			description:
-				'Atque',
-			dueDate: '2023-02-03',
-			priority: 'Priority 2',
-			checklist: true,
-		})
-	}
-}
-
-loadTodos() {
-	this._updateModalExistingProjects()
-			this._projects.forEach((proj, index) => proj.todo.forEach(todo => this._displayTodo(todo, index)))
+	_changeTitle(projIndex) {
+		const title = document.getElementById('title');
+		console.log(title);
+		title.textContent = this._projects[projIndex].name;
 	}
 
-
-// 	loadTodos(projIndex) {
-// this._updateModalExistingProjects()
-// 		this._projects[projIndex].todo.forEach(todo => {
-// 			this._displayTodo(todo, projIndex)
-// 		});
-// 	}
+	loadTodos() {
+		this._clearMainTodoList();
+		document.getElementById('title').textContent = 'All Todos';
+		this._projects.forEach((proj, index) =>
+			proj.todo.forEach((todo) => this._displayTodo(todo, index))
+		);
+	}
 
 	_render(projIndex) {
+		console.log('render', +projIndex);
+		this._clearProjectsList();
+		this._createProjectsList();
 
+		this._clearMainTodoList();
+		this._projects[projIndex].todo.forEach((todo) =>
+			this._displayTodo(todo, projIndex)
+		);
+		this._changeTitle(projIndex);
+
+		this._clearExistingProjectsModal();
+		this._createExistingProjectsModal();
 	}
 }
 
