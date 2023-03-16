@@ -1,10 +1,8 @@
 class Storage {
-
 	static getProjects() {
 		let projects;
 		if (localStorage.getItem('projects') === null) {
 			projects = [];
-
 		} else {
 			projects = JSON.parse(localStorage.getItem('projects'));
 		}
@@ -23,24 +21,28 @@ class Storage {
 		localStorage.setItem('projects', JSON.stringify(projects));
 	}
 
-	static getAllTodos() {
-		let projects;
-		let todos;
-		if (localStorage.getItem('projects') === null) {
-			projects = [];
-		} else {
-			projects = JSON.parse(localStorage.getItem('projects'));
-			todos = projects.forEach(proj => {
-				proj.todo;
-			});
-		}
-		return todos;
+	static removeTodo(projIndex, todoIndex) {
+		const projects = Storage.getProjects();
+		projects[projIndex].todo.splice(todoIndex, 1)
+		localStorage.setItem('projects', JSON.stringify(projects));
 	}
 
+	// static getAllTodos() {
+	// 	let projects;
+	// 	let todos;
+	// 	if (localStorage.getItem('projects') === null) {
+	// 		projects = [];
+	// 	} else {
+	// 		projects = JSON.parse(localStorage.getItem('projects'));
+	// 		todos = projects.forEach(proj => {
+	// 			proj.todo;
+	// 		});
+	// 	}
+	// 	return todos;
+	// }
 }
 
 export default Storage;
-
 
 // function createMainAllTodo() {
 // 	projects.forEach((element, index) => {

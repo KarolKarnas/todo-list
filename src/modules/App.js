@@ -9,6 +9,7 @@ class App {
 		this._tracker.loadTodos();
 		this._tracker._createExistingProjectsModal();
 		this._tracker._createProjectsList();
+		
 		//     this._tracker.addTodo(new Todo)
 		// console.log(this._tracker);
 
@@ -17,6 +18,8 @@ class App {
 			.addEventListener('click', this._newTodo.bind(this));
 
 		document.querySelector('#li-all-todo').addEventListener('click', () => this._tracker.loadTodos())
+
+		document.getElementById('todo-list').addEventListener('click', this._removeTodo.bind(this))
 	}
 	_loadModal() {
 		document.querySelectorAll('[data-modal-target]').forEach((button) => {
@@ -127,6 +130,14 @@ class App {
 			});
 		}
 		this._closeModal(modal)
+	}
+
+	_removeTodo(e) {
+		if (e.target.classList.contains('todo-icon-delete')) {
+			const li = e.target.parentElement.parentElement.parentElement
+			this._tracker.removeTodo(li.dataset.id);
+			li.remove();
+		}
 	}
 }
 

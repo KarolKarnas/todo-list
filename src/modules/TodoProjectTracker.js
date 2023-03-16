@@ -3,7 +3,7 @@ import Storage from './Storage';
 
 class TodoProjectsTracker {
 	constructor() {
-		this._todos = Storage.getProjects();
+		// this._todos = Storage.getProjects();
 		this._projects = Storage.getProjects();
 
 		this._checkEmpty();
@@ -20,6 +20,16 @@ class TodoProjectsTracker {
 	addProject(project) {
 		this._projects.push(project);
 		Storage.saveProject(project);
+	}
+
+	removeTodo(todoId) {
+		let todoIndex;
+		this._projects.forEach((proj, projIndex) => {
+			todoIndex = proj.todo.findIndex((todo) => todo.id == todoId);
+			if (todoIndex !== -1) {
+				Storage.removeTodo(projIndex, todoIndex)
+			}
+		});
 	}
 
 	//private
@@ -73,7 +83,7 @@ class TodoProjectsTracker {
 	}
 
 	_checkEmpty() {
-		if (this._todos.length === 0) {
+		if (this._projects.length === 0) {
 			Storage.saveProject({
 				id: 'bef36e0e1b027',
 				name: 'FIX the World2',
