@@ -2,7 +2,53 @@ class Storage {
 	static getProjects() {
 		let projects;
 		if (localStorage.getItem('projects') === null) {
-			projects = [];
+			projects = [
+				{
+					id: 'bef36e0e1b027',
+					name: 'FIX the World2',
+					todo: [
+						{
+							id: 'ca079bdcb9ba2',
+							title: 'Rebuild Houses',
+							description: 'Atque',
+							dueDate: '2023-02-03',
+							priority: 'Priority 2',
+							checklist: true,
+						},
+						{
+							id: 'ca069bdcb9ba2',
+							title: 'Born children',
+							description: 'Gitque',
+							dueDate: '2023-02-03',
+							priority: 'Priority 2',
+							checklist: false,
+						},
+						{
+							id: 'ca059bdcb9ba2',
+							title: 'Melt metal scraps',
+							description: 'Botu',
+							dueDate: '2023-02-03',
+							priority: 'Priority 2',
+							checklist: false,
+						},
+					],
+				},
+				{
+					id: 'bod36e0e1b027',
+					name: 'Body maintance',
+					todo: [
+						{
+							id: 'cfgg9bdcb9ba2',
+							title: 'Brush Teeth',
+							description: 'Atque',
+							dueDate: '2023-02-03',
+							priority: 'Priority 2',
+							checklist: true,
+						},
+					],
+				},
+			];
+			localStorage.setItem('projects', JSON.stringify(projects));
 		} else {
 			projects = JSON.parse(localStorage.getItem('projects'));
 		}
@@ -23,59 +69,9 @@ class Storage {
 
 	static removeTodo(projIndex, todoIndex) {
 		const projects = Storage.getProjects();
-		projects[projIndex].todo.splice(todoIndex, 1)
+		projects[projIndex].todo.splice(todoIndex, 1);
 		localStorage.setItem('projects', JSON.stringify(projects));
 	}
-
-	// static getAllTodos() {
-	// 	let projects;
-	// 	let todos;
-	// 	if (localStorage.getItem('projects') === null) {
-	// 		projects = [];
-	// 	} else {
-	// 		projects = JSON.parse(localStorage.getItem('projects'));
-	// 		todos = projects.forEach(proj => {
-	// 			proj.todo;
-	// 		});
-	// 	}
-	// 	return todos;
-	// }
 }
 
 export default Storage;
-
-// function createMainAllTodo() {
-// 	projects.forEach((element, index) => {
-// 		createTodo(index);
-// 	});
-// }
-
-// function createTodo(projectIndex) {
-// 	// let projectIndex = 0;
-
-// 	projects[projectIndex].todo.forEach((todo) => {
-// 	}
-// projects = [
-// 	{
-// 		id: 'bef36e0e1b027',
-// 		name: 'FIX the World',
-// 		todo: [				{
-// 			id: '7a0db27062748',
-// 			title: 'Destroy AI',
-// 			description:
-// 				'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere perferendis accusantium.',
-// 			dueDate: '2023-02-03',
-// 			priority: 'Priority 1',
-// 			checklist: false,
-// 		},
-// 		{
-// 			id: 'ca079bdcb9ba2',
-// 			title: 'Rebuild Houses',
-// 			description:
-// 				'Atque nisi doloremque tempore dicta porro, dolorum consectetur veniam perspiciatis error?',
-// 			dueDate: '2023-02-03',
-// 			priority: 'Priority 2',
-// 			checklist: true,
-// 		},],
-// 	},
-// ];

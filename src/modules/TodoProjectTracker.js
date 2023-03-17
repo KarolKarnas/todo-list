@@ -3,10 +3,7 @@ import Storage from './Storage';
 
 class TodoProjectsTracker {
 	constructor() {
-		// this._todos = Storage.getProjects();
 		this._projects = Storage.getProjects();
-
-		this._checkEmpty();
 	}
 
 	//public
@@ -27,7 +24,8 @@ class TodoProjectsTracker {
 		this._projects.forEach((proj, projIndex) => {
 			todoIndex = proj.todo.findIndex((todo) => todo.id == todoId);
 			if (todoIndex !== -1) {
-				Storage.removeTodo(projIndex, todoIndex)
+				this._projects[projIndex].todo.splice(todoIndex, 1);
+				Storage.removeTodo(projIndex, todoIndex);
 			}
 		});
 	}
@@ -37,12 +35,19 @@ class TodoProjectsTracker {
 	_displayTodo(todo, projIndex) {
 		const ul = document.getElementById('todo-list');
 		const todoLi = document.createElement('li');
+		let input;
+		if (todo.checklist === true) {
+			todoLi.classList.add('todo-done');
+			input = '<input class="checkbox" type="checkbox" checked />';
+		} else {
+			input = '<input class="checkbox" type="checkbox" />';
+		}
 		todoLi.classList.add('todo-single');
 		todoLi.setAttribute('data-id', todo.id);
 
 		todoLi.innerHTML = `
 		<div class="col-1">
-		<input class="checkbox" type="checkbox" />
+		${input}
 	</div>
 	<div class="col-2">
 		<div class="todo-title">${todo.title}</div>
@@ -82,31 +87,6 @@ class TodoProjectsTracker {
 		}
 	}
 
-	_checkEmpty() {
-		if (this._projects.length === 0) {
-			Storage.saveProject({
-				id: 'bef36e0e1b027',
-				name: 'FIX the World2',
-				todo: [],
-			});
-			Storage.saveTodo(0, {
-				id: 'ca079bdcb9ba2',
-				title: 'Rebuild Houses',
-				description: 'Atque',
-				dueDate: '2023-02-03',
-				priority: 'Priority 2',
-				checklist: true,
-			});
-		}
-	}
-
-	// 	loadTodos(projIndex) {
-	// this._createExistingProjectsModal()
-	// 		this._projects[projIndex].todo.forEach(todo => {
-	// 			this._displayTodo(todo, projIndex)
-	// 		});
-	// 	}
-
 	_clearMainTodoList() {
 		const ulTodoList = document.getElementById('todo-list');
 		while (ulTodoList.firstChild) {
@@ -119,7 +99,7 @@ class TodoProjectsTracker {
 			const liAllProjects = document.querySelector('#all-projects');
 			const projectItemMenu = document.createElement('li');
 			projectItemMenu.textContent = proj.name;
-			projectItemMenu.classList.add('new-project');
+			projectItemMenu.classList.add('new-project', 'li-nav');
 			projectItemMenu.setAttribute('data-id', proj.id);
 			projectItemMenu.setAttribute('data-project-Index', index);
 			liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
@@ -130,6 +110,7 @@ class TodoProjectsTracker {
 			// render content with according index number
 			projectItemMenu.addEventListener('click', (e) => {
 				// title.textContent = proj.name;
+				//WATCH
 				this._render(e.target.dataset.projectIndex);
 				// clearMainTodoList();
 				// createTodo(index);
@@ -146,9 +127,24 @@ class TodoProjectsTracker {
 
 	_changeTitle(projIndex) {
 		const title = document.getElementById('title');
-		console.log(title);
+		// console.log(title);
 		title.textContent = this._projects[projIndex].name;
 	}
+
+	// _addActive(projIndex) {
+	// 	const ul = document.getElementById('ul-nav');
+	// 	const allLi = ul.querySelectorAll('li');
+
+	// 	allLi.forEach((li) => li.classList.remove('li-active'));
+	// 	allLi.forEach((li) => {
+	// 		// console.log(li.dataset.projectIndex);
+	// 		// console.log(projIndex);
+	// 		if (li.dataset.projectIndex === projIndex) {
+	// 			console.log('hello');
+	// 			// li.classList.add('li-active')
+	// 		}
+	// 	});
+	// }
 
 	loadTodos() {
 		this._clearMainTodoList();
@@ -159,9 +155,10 @@ class TodoProjectsTracker {
 	}
 
 	_render(projIndex) {
-		console.log('render', +projIndex);
+		// console.log('render', +projIndex);
 		this._clearProjectsList();
 		this._createProjectsList();
+		// this._addActive(projIndex);
 
 		this._clearMainTodoList();
 		this._projects[projIndex].todo.forEach((todo) =>

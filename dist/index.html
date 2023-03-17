@@ -103,7 +103,7 @@
 						class="form-btn"
 						id="submit-btn"
 						type="submit"
-						style="display: inherit"
+						style="display: none"
 					>
 						SUBMIT
 					</button>
@@ -152,7 +152,7 @@
 
 			<div class="side-bar">
 				<ul id="ul-nav" class="sidebar-menu sidebar-main">
-					<li id="li-all-todo" class="li-active">
+					<li id="li-all-todo" class="li-active li-nav">
 						ALL Todo<button
 							data-modal-target="#modal"
 							class="material-symbols-outlined add-todo"
@@ -160,9 +160,9 @@
 							add
 						</button>
 					</li>
-					<li>Today</li>
-					<li>This week</li>
-					<li id="all-projects">
+					<li class="li-nav">Today</li>
+					<li class="li-nav">This week</li>
+					<li id="all-projects" class="li-nav">
 						ALL Projects<button class="material-symbols-outlined add-project">
 							add
 						</button>
@@ -175,7 +175,7 @@
 				<h1 id="title"></h1>
 				<div class="todo-container">
 					<ul id="todo-list" class="todo-list">
-<!-- 
+						<!-- 
 						<li class="todo-single">
 							<div class="col-1">
 								<input class="checkbox" type="checkbox" />
@@ -197,7 +197,6 @@
 								</div>
 							</div>
 						</li> -->
-
 					</ul>
 				</div>
 			</main>
