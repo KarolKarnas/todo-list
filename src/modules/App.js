@@ -9,6 +9,7 @@ class App {
 		this._tracker.loadTodos();
 		this._tracker._createExistingProjectsModal();
 		this._tracker._createProjectsList();
+		this._tracker._findProjTodoIndex('ca079bdcb9ba2')
 
 		//     this._tracker.addTodo(new Todo)
 		// console.log(this._tracker);
@@ -44,7 +45,23 @@ class App {
 	_setTodoDone(e) {
 		if (e.target.classList.contains('checkbox')) {
 			const li = e.target.closest('.todo-single');
+
+			// this._tracker.removeTodo(li.dataset.id);
+			// this._tracker.addTodoToProject(index, newTodo);
 			li.classList.toggle('todo-done');
+			const [projIndex, todoIndex] = this._tracker._findProjTodoIndex(li.dataset.id)
+
+			const newTodo = this._tracker._projects[projIndex].todo[todoIndex]
+
+			newTodo.checklist = !newTodo.checklist
+
+			
+			console.log(newTodo.checklist);
+			console.log(projIndex, todoIndex, newTodo);
+
+			this._tracker.removeTodo(li.dataset.id)
+			this._tracker.addTodoToProject(projIndex, newTodo, todoIndex)
+
 		}
 
 		// console.log(li.dataset.id);

@@ -61,10 +61,16 @@ class Storage {
 		localStorage.setItem('projects', JSON.stringify(projects));
 	}
 
-	static saveTodo(projectIndex, todo) {
+	static saveTodo(projectIndex, todo, todoIndex) {
+		if(todoIndex !== undefined)  {
+			const projects = Storage.getProjects();
+			projects[projectIndex].todo.splice(todoIndex, 0, todo);
+			localStorage.setItem('projects', JSON.stringify(projects));
+		} else {
 		const projects = Storage.getProjects();
 		projects[projectIndex].todo.push(todo);
 		localStorage.setItem('projects', JSON.stringify(projects));
+		}
 	}
 
 	static removeTodo(projIndex, todoIndex) {

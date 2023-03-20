@@ -8,10 +8,17 @@ class TodoProjectsTracker {
 
 	//public
 
-	addTodoToProject(index, todo) {
+	addTodoToProject(index, todo, todoIndex) {
+		if(todoIndex !== undefined) {
+			this._projects[index].todo.splice(todoIndex, 0, todo);
+			Storage.saveTodo(index, todo, todoIndex);
+			console.log('hello')
+		} else {
 		this._projects[index].todo.push(todo);
 		Storage.saveTodo(index, todo);
+		//watch
 		this._render(index);
+		}
 	}
 
 	addProject(project) {
@@ -146,6 +153,25 @@ class TodoProjectsTracker {
 	// 	});
 	// }
 
+	// ca079bdcb9ba2
+
+	_findProjTodoIndex(todoId) {
+
+		let todoIndex;
+		let currentProjIndex;
+		let currentTodoIndex;
+
+		this._projects.forEach((proj, projIndex) => {
+			todoIndex = proj.todo.findIndex((todo) => todo.id == todoId);
+			if (todoIndex !== -1) {
+				currentProjIndex = projIndex;
+				currentTodoIndex = todoIndex;
+			}
+		});
+		// console.log(currentProjIndex, currentTodoIndex)
+		return [currentProjIndex, currentTodoIndex]
+	}
+
 	loadTodos() {
 		this._clearMainTodoList();
 		document.getElementById('title').textContent = 'All Todos';
@@ -164,6 +190,7 @@ class TodoProjectsTracker {
 		this._projects[projIndex].todo.forEach((todo) =>
 			this._displayTodo(todo, projIndex)
 		);
+		// this.loadTodos()
 		this._changeTitle(projIndex);
 
 		this._clearExistingProjectsModal();
