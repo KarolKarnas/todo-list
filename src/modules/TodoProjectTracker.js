@@ -9,16 +9,16 @@ class TodoProjectsTracker {
 	//public
 
 	addTodoToProject(index, todo, todoIndex) {
-		if(todoIndex !== undefined) {
+		if (todoIndex !== undefined) {
 			this._projects[index].todo.splice(todoIndex, 0, todo);
 			Storage.saveTodo(index, todo, todoIndex);
-			console.log('hello')
 		} else {
-		this._projects[index].todo.push(todo);
-		Storage.saveTodo(index, todo);
-		//watch
-		this._render(index);
+			this._projects[index].todo.push(todo);
+			Storage.saveTodo(index, todo);
+			//watch
 		}
+		
+		this._render(index);
 	}
 
 	addProject(project) {
@@ -71,8 +71,6 @@ class TodoProjectsTracker {
 			<i class="material-symbols-outlined todo-icon-delete">delete</i>
 		</div>
 	</div>`;
-
-		// console.log(todoLi);
 		ul.appendChild(todoLi);
 	}
 
@@ -101,7 +99,7 @@ class TodoProjectsTracker {
 		}
 	}
 
-	_createProjectsList() {
+	_createProjectsList(projIndex) {
 		this._projects.forEach((proj, index) => {
 			const liAllProjects = document.querySelector('#all-projects');
 			const projectItemMenu = document.createElement('li');
@@ -110,19 +108,17 @@ class TodoProjectsTracker {
 			projectItemMenu.setAttribute('data-id', proj.id);
 			projectItemMenu.setAttribute('data-project-Index', index);
 			liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
-
-			// toggle class active
-			// selectAllLi();
-			// addToggleClassOnLi();
-			// render content with according index number
-			projectItemMenu.addEventListener('click', (e) => {
-				// title.textContent = proj.name;
-				//WATCH
-				this._render(e.target.dataset.projectIndex);
-				// clearMainTodoList();
-				// createTodo(index);
-			});
 		});
+//watch
+		const ul = document.getElementById('ul-nav');
+		const allLi = ul.querySelectorAll('li');
+
+		allLi.forEach((li) =>
+			li.addEventListener('click', (e) => {
+				allLi.forEach((li) => li.classList.remove('li-active'));
+				e.target.classList.add('li-active');
+			})
+		);
 	}
 
 	_clearProjectsList() {
@@ -134,29 +130,10 @@ class TodoProjectsTracker {
 
 	_changeTitle(projIndex) {
 		const title = document.getElementById('title');
-		// console.log(title);
 		title.textContent = this._projects[projIndex].name;
 	}
 
-	// _addActive(projIndex) {
-	// 	const ul = document.getElementById('ul-nav');
-	// 	const allLi = ul.querySelectorAll('li');
-
-	// 	allLi.forEach((li) => li.classList.remove('li-active'));
-	// 	allLi.forEach((li) => {
-	// 		// console.log(li.dataset.projectIndex);
-	// 		// console.log(projIndex);
-	// 		if (li.dataset.projectIndex === projIndex) {
-	// 			console.log('hello');
-	// 			// li.classList.add('li-active')
-	// 		}
-	// 	});
-	// }
-
-	// ca079bdcb9ba2
-
 	_findProjTodoIndex(todoId) {
-
 		let todoIndex;
 		let currentProjIndex;
 		let currentTodoIndex;
@@ -168,8 +145,7 @@ class TodoProjectsTracker {
 				currentTodoIndex = todoIndex;
 			}
 		});
-		// console.log(currentProjIndex, currentTodoIndex)
-		return [currentProjIndex, currentTodoIndex]
+		return [currentProjIndex, currentTodoIndex];
 	}
 
 	loadTodos() {
@@ -179,19 +155,31 @@ class TodoProjectsTracker {
 			proj.todo.forEach((todo) => this._displayTodo(todo, index))
 		);
 	}
+//watch
+	_addActive(projIndex) {
+		const ul = document.getElementById('ul-nav');
+		const newProjects = ul.querySelectorAll('.new-project');
+		const allProjects = ul.querySelectorAll('li');
+
+		allProjects.forEach((li) => li.classList.remove('li-active'));
+
+		newProjects.forEach((proj) => {
+			if (proj.dataset.projectIndex === projIndex) {
+				proj.classList.add('li-active');
+			}
+		});
+	}
 
 	_render(projIndex) {
-		// console.log('render', +projIndex);
 		this._clearProjectsList();
-		this._createProjectsList();
-		// this._addActive(projIndex);
+		this._createProjectsList(projIndex);
 
 		this._clearMainTodoList();
 		this._projects[projIndex].todo.forEach((todo) =>
 			this._displayTodo(todo, projIndex)
 		);
-		// this.loadTodos()
 		this._changeTitle(projIndex);
+		this._addActive(projIndex);
 
 		this._clearExistingProjectsModal();
 		this._createExistingProjectsModal();

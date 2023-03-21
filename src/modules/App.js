@@ -9,10 +9,6 @@ class App {
 		this._tracker.loadTodos();
 		this._tracker._createExistingProjectsModal();
 		this._tracker._createProjectsList();
-		this._tracker._findProjTodoIndex('ca079bdcb9ba2')
-
-		//     this._tracker.addTodo(new Todo)
-		// console.log(this._tracker);
 
 		document
 			.querySelector('#submit-btn')
@@ -33,14 +29,37 @@ class App {
 			.querySelector('#li-all-todo')
 			.addEventListener('click', () => this._tracker.loadTodos());
 
-		document
+			document
 			.getElementById('ul-nav')
-			.addEventListener('click', this._toggleActiveLi.bind(this));
+			.addEventListener('click', this._rednderProject.bind(this));
+
+		// document
+		// 	.getElementById('ul-nav')
+		// 	.addEventListener('click', this._toggleActiveLi.bind(this));
 
 		document
 			.getElementById('todo-list')
 			.addEventListener('click', this._setTodoDone.bind(this));
+
+		
 	}
+
+	_rednderProject(e) {
+		if (e.target.classList.contains('new-project')) {
+			this._tracker._render(e.target.dataset.projectIndex)
+		}
+	}
+
+		//watch
+		// _toggleActiveLi(e) {
+		// 	if (e.target.classList.contains('li-nav')) {
+		// 		const ul = document.getElementById('ul-nav');
+		// 		ul.querySelectorAll('li').forEach((li) =>
+		// 			li.classList.remove('li-active')
+		// 		);
+		// 		e.target.classList.add('li-active');
+		// 	}
+		// }
 
 	_setTodoDone(e) {
 		if (e.target.classList.contains('checkbox')) {
@@ -49,34 +68,19 @@ class App {
 			// this._tracker.removeTodo(li.dataset.id);
 			// this._tracker.addTodoToProject(index, newTodo);
 			li.classList.toggle('todo-done');
-			const [projIndex, todoIndex] = this._tracker._findProjTodoIndex(li.dataset.id)
-
-			const newTodo = this._tracker._projects[projIndex].todo[todoIndex]
-
-			newTodo.checklist = !newTodo.checklist
-
-			
-			console.log(newTodo.checklist);
-			console.log(projIndex, todoIndex, newTodo);
-
-			this._tracker.removeTodo(li.dataset.id)
-			this._tracker.addTodoToProject(projIndex, newTodo, todoIndex)
-
-		}
-
-		// console.log(li.dataset.id);
-		// save change tracker and Storage
-	}
-//watch
-	_toggleActiveLi(e) {
-		if (e.target.classList.contains('li-nav')) {
-			const ul = document.getElementById('ul-nav');
-			ul.querySelectorAll('li').forEach((li) =>
-				li.classList.remove('li-active')
+			const [projIndex, todoIndex] = this._tracker._findProjTodoIndex(
+				li.dataset.id
 			);
-			e.target.classList.add('li-active');
+
+			const newTodo = this._tracker._projects[projIndex].todo[todoIndex];
+
+			newTodo.checklist = !newTodo.checklist;
+
+			this._tracker.removeTodo(li.dataset.id);
+			this._tracker.addTodoToProject(projIndex, newTodo, todoIndex);
 		}
 	}
+
 	_loadModal() {
 		const submitButton = document.getElementById('submit-btn');
 		document.querySelectorAll('[data-modal-target]').forEach((button) => {
@@ -261,25 +265,20 @@ class App {
 		const inputDueDate = document.getElementById('dueDate');
 		const inputPriority = document.getElementById('priority');
 
-		const newTodo = new Todo(
-			inputTitle.value,
-			inputDescription.value,
-			inputDueDate.value,
-			inputPriority.value
-		);
-
-		const currentProjectIndex = modal.dataset.projectIndex;
-		const cuttentTodoIndex = modal.dataset.todoIndex;
 		const currentTodoId = modal.dataset.todoId;
 
+		const [projIndex, todoIndex] =
+			this._tracker._findProjTodoIndex(currentTodoId);
+
+		const newTodo = this._tracker._projects[projIndex].todo[todoIndex];
+
+		newTodo.title = inputTitle.value;
+		newTodo.description = inputDescription.value;
+		newTodo.dueDate = inputDueDate.value;
+		newTodo.priority = inputPriority.value;
 		if (radioNewProject.checked) {
-			// this._removeTodo()
 			this._tracker.removeTodo(currentTodoId);
-			// li.remove();
-
 			let newProject = new Project(inputNewProject.value);
-			// newProject.todo.push(newTodo);
-
 			this._tracker.addProject(newProject);
 			this._tracker.addTodoToProject(
 				this._tracker._projects.length - 1,
@@ -288,20 +287,16 @@ class App {
 		} else if (radioExistingProject.checked) {
 			this._tracker._projects.forEach((proj, index) => {
 				if (proj.name === inputSelectProject.value) {
-		
+					if (index === projIndex) {
+						this._tracker.removeTodo(currentTodoId);
+						this._tracker.addTodoToProject(projIndex, newTodo, todoIndex);
+					} else {
 						this._tracker.removeTodo(currentTodoId);
 						this._tracker.addTodoToProject(index, newTodo);
-					
-					// if (currentProjectIndex === index) {
-					// } else {
-					// 	this._tracker.removeTodo(currentTodoId);
-					// 	this._tracker.addTodoToProject(index, newTodo);
-					// }
-
+					}
 				}
 			});
 		}
-
 
 		this._closeModal(modal);
 	}
