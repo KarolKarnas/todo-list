@@ -29,7 +29,7 @@ class App {
 			.querySelector('#li-all-todo')
 			.addEventListener('click', () => this._tracker.loadTodos());
 
-			document
+		document
 			.getElementById('ul-nav')
 			.addEventListener('click', this._rednderProject.bind(this));
 
@@ -40,26 +40,24 @@ class App {
 		document
 			.getElementById('todo-list')
 			.addEventListener('click', this._setTodoDone.bind(this));
-
-		
 	}
 
 	_rednderProject(e) {
 		if (e.target.classList.contains('new-project')) {
-			this._tracker._render(e.target.dataset.projectIndex)
+			this._tracker._render(e.target.dataset.projectIndex);
 		}
 	}
 
-		//watch
-		// _toggleActiveLi(e) {
-		// 	if (e.target.classList.contains('li-nav')) {
-		// 		const ul = document.getElementById('ul-nav');
-		// 		ul.querySelectorAll('li').forEach((li) =>
-		// 			li.classList.remove('li-active')
-		// 		);
-		// 		e.target.classList.add('li-active');
-		// 	}
-		// }
+	//watch
+	// _toggleActiveLi(e) {
+	// 	if (e.target.classList.contains('li-nav')) {
+	// 		const ul = document.getElementById('ul-nav');
+	// 		ul.querySelectorAll('li').forEach((li) =>
+	// 			li.classList.remove('li-active')
+	// 		);
+	// 		e.target.classList.add('li-active');
+	// 	}
+	// }
 
 	_setTodoDone(e) {
 		if (e.target.classList.contains('checkbox')) {

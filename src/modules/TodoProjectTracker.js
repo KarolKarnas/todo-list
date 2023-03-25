@@ -1,4 +1,3 @@
-import Todo from './Todo';
 import Storage from './Storage';
 
 class TodoProjectsTracker {
@@ -17,7 +16,6 @@ class TodoProjectsTracker {
 			Storage.saveTodo(index, todo);
 			//watch
 		}
-		
 		this._render(index);
 	}
 
@@ -109,7 +107,7 @@ class TodoProjectsTracker {
 			projectItemMenu.setAttribute('data-project-Index', index);
 			liAllProjects.insertAdjacentElement('afterend', projectItemMenu);
 		});
-//watch
+		//watch
 		const ul = document.getElementById('ul-nav');
 		const allLi = ul.querySelectorAll('li');
 
@@ -155,16 +153,14 @@ class TodoProjectsTracker {
 			proj.todo.forEach((todo) => this._displayTodo(todo, index))
 		);
 	}
-//watch
+	//watch
 	_addActive(projIndex) {
 		const ul = document.getElementById('ul-nav');
 		const newProjects = ul.querySelectorAll('.new-project');
 		const allProjects = ul.querySelectorAll('li');
-
 		allProjects.forEach((li) => li.classList.remove('li-active'));
-
 		newProjects.forEach((proj) => {
-			if (proj.dataset.projectIndex === projIndex) {
+			if (proj.dataset.projectIndex == projIndex) {
 				proj.classList.add('li-active');
 			}
 		});
