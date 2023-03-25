@@ -1,8 +1,10 @@
 import Storage from './Storage';
+import { format, compareAsc } from 'date-fns'
 
 class TodoProjectsTracker {
 	constructor() {
 		this._projects = Storage.getProjects();
+		console.log(this._projects);
 	}
 
 	//public
@@ -180,6 +182,19 @@ class TodoProjectsTracker {
 		this._clearExistingProjectsModal();
 		this._createExistingProjectsModal();
 	}
+
+	_renderDate(today) {
+		this._clearMainTodoList();
+		let date = format(today, 'yyyy-MM-dd');
+		// console.log(format(today, 'yyyy-MM-dd'))
+		this._projects.forEach((proj, projIndex) => {
+		  proj.todo.forEach(todo => {
+			if (todo.dueDate === date) {
+				this._displayTodo(todo, projIndex)
+			}
+		  });
+		});
+	  }
 }
 
 export default TodoProjectsTracker;

@@ -9,7 +9,12 @@ class App {
 		this._tracker.loadTodos();
 		this._tracker._createExistingProjectsModal();
 		this._tracker._createProjectsList();
+		this._addListeners();
 
+
+	}
+
+	_addListeners() {
 		document
 			.querySelector('#submit-btn')
 			.addEventListener('click', this._newTodo.bind(this));
@@ -31,7 +36,7 @@ class App {
 
 		document
 			.getElementById('ul-nav')
-			.addEventListener('click', this._rednderProject.bind(this));
+			.addEventListener('click', this._renderProject.bind(this));
 
 		// document
 		// 	.getElementById('ul-nav')
@@ -40,9 +45,18 @@ class App {
 		document
 			.getElementById('todo-list')
 			.addEventListener('click', this._setTodoDone.bind(this));
+
+		document.getElementById('today').addEventListener('click', this._renderToday.bind(this))
 	}
 
-	_rednderProject(e) {
+	_renderToday(e) {
+		const today = new Date
+		this._tracker._renderDate(today)
+		// console.log(e);
+		// console.log(this);
+	}
+
+	_renderProject(e) {
 		if (e.target.classList.contains('new-project')) {
 			this._tracker._render(e.target.dataset.projectIndex);
 		}
