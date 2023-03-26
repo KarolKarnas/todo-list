@@ -1,10 +1,10 @@
 import Storage from './Storage';
-import { format, compareAsc } from 'date-fns'
+import { format, add, isWithinInterval, parseISO, addDays } from 'date-fns';
 
 class TodoProjectsTracker {
 	constructor() {
 		this._projects = Storage.getProjects();
-		console.log(this._projects);
+		// console.log(this._projects);
 	}
 
 	//public
@@ -183,18 +183,31 @@ class TodoProjectsTracker {
 		this._createExistingProjectsModal();
 	}
 
-	_renderDate(today) {
+	_renderDate(type) {
 		this._clearMainTodoList();
-		let date = format(today, 'yyyy-MM-dd');
-		// console.log(format(today, 'yyyy-MM-dd'))
-		this._projects.forEach((proj, projIndex) => {
-		  proj.todo.forEach(todo => {
-			if (todo.dueDate === date) {
-				this._displayTodo(todo, projIndex)
-			}
-		  });
-		});
-	  }
+		const dateToday = new Date();
+		const today = format(dateToday, 'yyyy-MM-dd');
+		if (type === 'today') {
+			this._projects.forEach((proj, projIndex) => {
+				proj.todo.forEach((todo) => {
+					if (todo.dueDate === today) {
+						this._displayTodo(todo, projIndex);
+					}
+				});
+			});
+		} else if (type === 'week') {
+			const endWeek = parseISO(
+				format(addDays(parseISO(today), 7), 'yyyy-MM-dd')
+			);
+			this._projects.forEach((proj, projIndex) => {
+				proj.todo.forEach((todo) => {
+					if (isWithinInterval(parseISO(todo.dueDate), {start: dateToday, end: endWeek})) {
+						this._displayTodo(todo, projIndex);
+					}
+				});
+			});
+		}
+	}
 }
 
 export default TodoProjectsTracker;

@@ -10,8 +10,6 @@ class App {
 		this._tracker._createExistingProjectsModal();
 		this._tracker._createProjectsList();
 		this._addListeners();
-
-
 	}
 
 	_addListeners() {
@@ -46,14 +44,19 @@ class App {
 			.getElementById('todo-list')
 			.addEventListener('click', this._setTodoDone.bind(this));
 
-		document.getElementById('today').addEventListener('click', this._renderToday.bind(this))
+		document
+			.getElementById('today')
+			.addEventListener('click', this._renderTime.bind(this, 'today'));
+
+		document
+			.getElementById('week')
+			.addEventListener('click', this._renderTime.bind(this, 'week'));
 	}
 
-	_renderToday(e) {
-		const today = new Date
-		this._tracker._renderDate(today)
-		// console.log(e);
-		// console.log(this);
+	_renderTime(type, e) {
+		// console.log(type);
+		// console.log(e.target);
+		this._tracker._renderDate(type);
 	}
 
 	_renderProject(e) {
