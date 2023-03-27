@@ -1,10 +1,9 @@
 import Storage from './Storage';
-import { format, add, isWithinInterval, parseISO, addDays } from 'date-fns';
+import { format, isWithinInterval, parseISO, addDays } from 'date-fns';
 
 class TodoProjectsTracker {
 	constructor() {
 		this._projects = Storage.getProjects();
-		// console.log(this._projects);
 	}
 
 	//public

@@ -36,10 +36,6 @@ class App {
 			.getElementById('ul-nav')
 			.addEventListener('click', this._renderProject.bind(this));
 
-		// document
-		// 	.getElementById('ul-nav')
-		// 	.addEventListener('click', this._toggleActiveLi.bind(this));
-
 		document
 			.getElementById('todo-list')
 			.addEventListener('click', this._setTodoDone.bind(this));
@@ -54,8 +50,6 @@ class App {
 	}
 
 	_renderTime(type, e) {
-		// console.log(type);
-		// console.log(e.target);
 		this._tracker._renderDate(type);
 	}
 
@@ -65,23 +59,10 @@ class App {
 		}
 	}
 
-	//watch
-	// _toggleActiveLi(e) {
-	// 	if (e.target.classList.contains('li-nav')) {
-	// 		const ul = document.getElementById('ul-nav');
-	// 		ul.querySelectorAll('li').forEach((li) =>
-	// 			li.classList.remove('li-active')
-	// 		);
-	// 		e.target.classList.add('li-active');
-	// 	}
-	// }
-
 	_setTodoDone(e) {
 		if (e.target.classList.contains('checkbox')) {
 			const li = e.target.closest('.todo-single');
 
-			// this._tracker.removeTodo(li.dataset.id);
-			// this._tracker.addTodoToProject(index, newTodo);
 			li.classList.toggle('todo-done');
 			const [projIndex, todoIndex] = this._tracker._findProjTodoIndex(
 				li.dataset.id
