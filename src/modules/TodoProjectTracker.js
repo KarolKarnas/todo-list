@@ -1,12 +1,10 @@
-import Storage from './Storage';
 import { format, isWithinInterval, parseISO, addDays } from 'date-fns';
+import Storage from './Storage';
 
 class TodoProjectsTracker {
 	constructor() {
 		this._projects = Storage.getProjects();
 	}
-
-	//public
 
 	addTodoToProject(index, todo, todoIndex) {
 		if (todoIndex !== undefined) {
@@ -15,7 +13,6 @@ class TodoProjectsTracker {
 		} else {
 			this._projects[index].todo.push(todo);
 			Storage.saveTodo(index, todo);
-			//watch
 		}
 		this._render(index);
 	}
@@ -35,8 +32,6 @@ class TodoProjectsTracker {
 			}
 		});
 	}
-
-	//private
 
 	_displayTodo(todo, projIndex) {
 		const ul = document.getElementById('todo-list');
@@ -154,6 +149,7 @@ class TodoProjectsTracker {
 			proj.todo.forEach((todo) => this._displayTodo(todo, index))
 		);
 	}
+
 	//watch
 	_addActive(projIndex) {
 		const ul = document.getElementById('ul-nav');

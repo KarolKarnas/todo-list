@@ -11,6 +11,6 @@
 	},
 	"rules": {
 		"no-console": "off",
-		"no-underscore-dangle": "allow"
+		"no-underscore-dangle": "off"
 	}
 }

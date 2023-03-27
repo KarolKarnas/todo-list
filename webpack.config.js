@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-	mode: 'production',
+	mode: 'development',
 	entry: './src/index.js',
 	output: {
 		filename: 'main.js',
@@ -10,6 +10,7 @@ module.exports = {
     //   arrowFunction: false,
     // },
 	},
+  // devtool: 'source-map',
 	module: {
 		rules: [
 			{
