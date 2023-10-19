@@ -49,7 +49,7 @@ class App {
 			.addEventListener('click', this._renderTime.bind(this, 'week'));
 	}
 
-	_renderTime(type, e) {
+	_renderTime(type) {
 		this._tracker._renderDate(type);
 	}
 
@@ -171,7 +171,7 @@ class App {
 		);
 
 		if (radioNewProject.checked) {
-			let newProject = new Project(inputNewProject.value);
+			const newProject = new Project(inputNewProject.value);
 			// newProject.todo.push(newTodo);
 
 			this._tracker.addProject(newProject);
@@ -213,7 +213,7 @@ class App {
 			let currentTodoIndex;
 
 			this._tracker._projects.forEach((proj, projIndex) => {
-				todoIndex = proj.todo.findIndex((todo) => todo.id == todoId);
+				todoIndex = proj.todo.findIndex((thisTodo) => thisTodo.id === todoId);
 				if (todoIndex !== -1) {
 					todo = this._tracker._projects[projIndex].todo[todoIndex];
 					projName = this._tracker._projects[projIndex].name;
@@ -228,12 +228,12 @@ class App {
 			modal.setAttribute('data-todo-index', currentTodoIndex);
 			modal.setAttribute('data-todo-id', todoId);
 
-			const radioNewProject = document.getElementById('projectNameOption');
-			const radioExistingProject = document.getElementById(
-				'selectProjectOption'
-			);
+			// const radioNewProject = document.getElementById('projectNameOption');
+			// const radioExistingProject = document.getElementById(
+			// 	'selectProjectOption'
+			// );
 			const inputSelectProject = document.getElementById('selectProject');
-			const inputNewProject = document.getElementById('project-name');
+			// const inputNewProject = document.getElementById('project-name');
 
 			const inputTitle = document.getElementById('todo-title');
 			const inputDescription = document.getElementById('description');
@@ -274,7 +274,7 @@ class App {
 		newTodo.priority = inputPriority.value;
 		if (radioNewProject.checked) {
 			this._tracker.removeTodo(currentTodoId);
-			let newProject = new Project(inputNewProject.value);
+			const newProject = new Project(inputNewProject.value);
 			this._tracker.addProject(newProject);
 			this._tracker.addTodoToProject(
 				this._tracker._projects.length - 1,
