@@ -3,11 +3,11 @@
 [Live Demo](https://karolkarnas.github.io/todo-list/dist/index.html) :point_left:
 
 - **HTML and CSS**:
-  - Created a well-structured HTML layout for todo list,
+  - Created a well-structured HTML layout for the todo list,
   - Styled project with CSS to improve its visual appeal and user experience
 
 - **JavaScript**:
-  - Utilized JavaScript to make your todo list interactive,
+  - Utilized JavaScript to make the todo list interactive,
   - Managed user interactions, such as adding, completing, and removing tasks,
   - Implemented dynamic content updates in the DOM using JavaScript
 
@@ -35,4 +35,4 @@
 
 - **Version Control**:
   - Managed the project's code changes using Git for version control,
-  - Collaborated with others by using remote repositories like GitHub
+  - Used GitHub for collaboration, sharing and deployment
