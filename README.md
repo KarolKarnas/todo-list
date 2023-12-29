@@ -3,7 +3,7 @@
 [Live Demo](https://karolkarnas.github.io/todo-list/dist/index.html) :point_left:
 
 
-## What Do I Learn
+## What I Have Learned
 
 In the process of building this Todo List application, I've gained knowledge and practical experience in the following areas:
 
